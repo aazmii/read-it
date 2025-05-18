@@ -1,10 +1,9 @@
 import 'dart:io';
 
-import 'package:pdf_text/pdf_text.dart';
+// import 'package:pdf_text/pdf_text.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'detail.provider.g.dart';
-
 
 @Riverpod(keepAlive: true)
 class SelectedPDF extends _$SelectedPDF {
@@ -48,8 +47,9 @@ class PlainText extends _$PlainText {
     final currentPage = ref.watch(pageNumProvider);
     if (file == null) return null;
 
-    final pdfDoc = await PDFDoc.fromPath(file.path);
+    // final pdfDoc = await PDFDoc.fromPath(file.path);
 
-    return await pdfDoc.pageAt(currentPage + 1).text;
+    // return await pdfDoc.pageAt(currentPage + 1).text;
+    return null;
   }
 }

@@ -7,12 +7,7 @@ import 'package:pattern_m/src/modules/dictionary/api/e2b.dictionary.dart';
 import 'src/app.dart' show MyApp;
 import 'src/db/isar.dart' show openDB;
 
-
-void main() async => await _init().then(
-      (_) => runApp(
-        const ProviderScope(child: MyApp()),
-      ),
-    );
+void main() async => await _init().then((_) => runApp(const ProviderScope(child: MyApp())));
 
 Future<void> _init() async {
   WidgetsFlutterBinding.ensureInitialized();
