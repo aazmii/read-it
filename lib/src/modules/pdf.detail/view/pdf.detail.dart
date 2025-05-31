@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:pattern_m/src/extensions/extensions.dart';
 import 'package:pattern_m/src/modules/pdf.detail/provider/detail.provider.dart';
-import 'component/assist.view.dart';
-import 'component/pdf.view.dart';
+
 import 'component/toggle.mode.button.dart';
 
 class PdfDetail extends ConsumerWidget {
@@ -35,9 +32,9 @@ class PdfDetail extends ConsumerWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 4.0, right: 4.0),
-        child: readMode == Mode.normal
-            ? const PdfViewWidget()
-            : const AssistView(),
+        // child: readMode == Mode.normal
+        //     ? const PdfViewWidget()
+        //     : const AssistView(),
         // : const PdfContent(),
       ),
     );

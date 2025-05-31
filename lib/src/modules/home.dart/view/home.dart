@@ -6,6 +6,7 @@ import 'package:pattern_m/src/extensions/extensions.dart';
 import 'package:pattern_m/src/modules/pdf.detail/provider/detail.provider.dart';
 import 'package:pattern_m/src/modules/pdf.detail/view/pdf.detail.dart';
 import 'package:pattern_m/src/modules/router/provider/route.provider.dart';
+import 'package:pattern_m/src/testing/word.box.2.dart';
 
 import '../../drawer/app.drawer.dart';
 import '../provider/home.provider.dart';
@@ -16,6 +17,7 @@ class Home extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
+    return PdfWordExtractor();
     return Scaffold(
       drawer: const AppDrawer(),
       appBar: AppBar(),
@@ -41,9 +43,7 @@ class Home extends ConsumerWidget {
                               child: FileTile(
                                 file: recentFile,
                                 onPressed: () async {
-                                  ref
-                                      .read(selectedPDFProvider.notifier)
-                                      .update = File(recentFile.path!);
+                                  ref.read(selectedPDFProvider.notifier).update = File(recentFile.path!);
                                   await fadePush(context, const PdfDetail());
                                 },
                               ),
