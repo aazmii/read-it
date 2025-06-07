@@ -6,6 +6,7 @@ part 'opened.file.detail.g.dart';
 class RecentFile {
   Id id = Isar.autoIncrement;
   String? path;
+  String? converPath;
   DateTime? lastOpen;
   List<byte>? fileData;
   bool? isLastOpened;

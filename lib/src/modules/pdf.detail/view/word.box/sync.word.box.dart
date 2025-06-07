@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'dart:typed_data';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pattern_m/src/modules/pdf.detail/provider/detail.provider.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 
-class SyncfunctinoWordBoxTest extends StatefulWidget {
-  const SyncfunctinoWordBoxTest({super.key});
+class SyncfunctinoWordBox extends ConsumerStatefulWidget {
+  const SyncfunctinoWordBox({super.key});
 
   @override
   PdfWordTapPageState createState() => PdfWordTapPageState();
 }
 
-class PdfWordTapPageState extends State<SyncfunctinoWordBoxTest> {
+class PdfWordTapPageState extends ConsumerState<SyncfunctinoWordBox> {
   List<_WordBox> _wordBoxes = [];
 
   @override
@@ -21,10 +21,10 @@ class PdfWordTapPageState extends State<SyncfunctinoWordBoxTest> {
 
   Future<void> _loadPdfAndExtractWords() async {
     // Load PDF file as bytes
-    final bytes = await rootBundle.load('assets/pdf/sample.pdf');
-    final Uint8List pdfData = bytes.buffer.asUint8List();
-
-    final PdfDocument document = PdfDocument(inputBytes: pdfData);
+    // final bytes = await rootBundle.load('assets/pdf/sample.pdf');
+    // final Uint8List pdfData = bytes.buffer.asUint8List();
+    final file = ref.read(selectedPDFProvider);
+    final PdfDocument document = PdfDocument(inputBytes: file!.readAsBytesSync());
 
     final PdfTextExtractor extractor = PdfTextExtractor(document);
     final List<TextLine> lines = extractor.extractTextLines(startPageIndex: 0, endPageIndex: 0);
@@ -51,10 +51,9 @@ class PdfWordTapPageState extends State<SyncfunctinoWordBoxTest> {
   void _handleTap(Offset localPosition) {
     for (final box in _wordBoxes) {
       if (box.rect.contains(localPosition)) {
-        print('Tapped on: ${box.word}');
-        // ScaffoldMessenger.of(context).showSnackBar(
-        //   SnackBar(content: Text('Tapped on: ${box.word}')),
-        // );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(box.word)),
+        );
         return;
       }
     }
@@ -86,9 +85,8 @@ class PdfWordTapPageState extends State<SyncfunctinoWordBoxTest> {
                   width: box.rect.width,
                   height: box.rect.height + 20,
                   child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.red.withOpacity(0.5)),
-                    ),
+                    padding: const EdgeInsets.all(2),
+                    decoration: BoxDecoration(border: Border.all(color: Colors.transparent)),
                     child: Text(
                       box.word,
                       style: const TextStyle(color: Colors.black),

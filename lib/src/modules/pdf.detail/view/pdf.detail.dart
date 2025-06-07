@@ -11,7 +11,7 @@ class PdfDetail extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     final currentPage = ref.watch(pageNumProvider);
     final notifier = ref.read(pageNumProvider.notifier);
-    final readMode = ref.watch(readModeProvider);
+    // final readMode = ref.watch(readModeProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -23,9 +23,7 @@ class PdfDetail extends ConsumerWidget {
                   icon: const Icon(Icons.arrow_back_ios),
                   onPressed: notifier.previous,
                 ),
-                IconButton(
-                    icon: const Icon(Icons.arrow_forward_ios),
-                    onPressed: notifier.next),
+                IconButton(icon: const Icon(Icons.arrow_forward_ios), onPressed: notifier.next),
                 const ToggleModeButton(),
               ]
             : [],

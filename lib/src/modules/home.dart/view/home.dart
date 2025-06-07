@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pattern_m/src/extensions/extensions.dart';
 import 'package:pattern_m/src/modules/pdf.detail/provider/detail.provider.dart';
-import 'package:pattern_m/src/modules/pdf.detail/view/pdf.detail.dart';
-import 'package:pattern_m/src/modules/router/provider/route.provider.dart';
-import 'package:pattern_m/src/testing/word.box.2.dart';
+import 'package:pattern_m/src/modules/pdf.detail/view/syncfunction.viewer/syncfunction.viewer.pdf.detail.dart';
 
 import '../../drawer/app.drawer.dart';
 import '../provider/home.provider.dart';
@@ -17,7 +15,7 @@ class Home extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    return PdfWordExtractor();
+    // return PdfWordExtractor();
     return Scaffold(
       drawer: const AppDrawer(),
       appBar: AppBar(),
@@ -44,7 +42,11 @@ class Home extends ConsumerWidget {
                                 file: recentFile,
                                 onPressed: () async {
                                   ref.read(selectedPDFProvider.notifier).update = File(recentFile.path!);
-                                  await fadePush(context, const PdfDetail());
+                                  context.push(const ScyncfuncitonPdfDetail());
+
+                                  // await fadePush(context, const SyncfunctinoWordBox());
+                                  // await fadePush(context, const PdfWordExtractor());
+                                  // await fadePush(context, const PdfDetail());
                                 },
                               ),
                             );
@@ -76,7 +78,10 @@ class Home extends ConsumerWidget {
     ref.read(selectedPDFProvider.notifier).update = pickedFile;
 
     if (!context.mounted) return;
-    context.push(const PdfDetail());
+    // context.push(const SyncfunctinoWordBox());
+    // context.push(const PdfWordExtractor());
+    context.push(const ScyncfuncitonPdfDetail());
+    // context.push(const PdfDetail());
     if (!context.mounted) return;
   }
 }

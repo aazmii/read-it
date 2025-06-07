@@ -24,9 +24,7 @@ Future<PlatformFile?> pickPDF() async {
 }
 
 Future updateDB(File file) async {
-  final fileName = file.path.getLast('/');
-  final savedFile =
-      await db.recentFiles.filter().pathEndsWith(fileName).findFirst();
+  final savedFile = await db.recentFiles.filter().pathEndsWith(file.name ?? '').findFirst();
   if (savedFile != null) {
     ///Update last open time
     await db.writeTxn(() async {

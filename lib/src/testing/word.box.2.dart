@@ -20,10 +20,10 @@ class PdfWordExtractorState extends State<PdfWordExtractor> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PDF Word Extractor'),
+        title: const Text('PDF Word Extractor'),
         actions: [
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: () async {
               // Load the PDF document
               final ByteData data = await rootBundle.load('assets/pdf/sample.pdf');
@@ -37,7 +37,7 @@ class PdfWordExtractorState extends State<PdfWordExtractor> {
         children: [
           if (_selectedWord != null)
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Text('Selected word: $_selectedWord'),
             ),
           Expanded(
@@ -46,7 +46,6 @@ class PdfWordExtractorState extends State<PdfWordExtractor> {
               controller: _pdfViewerController,
               onTap: (PdfGestureDetails details) async {
                 if (_document == null) return;
-
                 // Get page number from details
                 final int pageNumber = details.pageNumber;
 
