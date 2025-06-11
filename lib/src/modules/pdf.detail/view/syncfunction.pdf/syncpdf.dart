@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pattern_m/src/modules/pdf.detail/provider/detail.provider.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
@@ -97,7 +96,6 @@ class PdfWordExtractorState extends ConsumerState<PdfWordExtractor> {
             });
             return;
           }
-          print(word.text);
         }
       }
     } catch (e) {
@@ -105,39 +103,39 @@ class PdfWordExtractorState extends ConsumerState<PdfWordExtractor> {
     }
   }
 
-  _onTap2(PdfGestureDetails details) {
-    final int pageNumber = details.pageNumber;
-    final PdfTextExtractor extractor = PdfTextExtractor(_document!);
-    try {
-      final List<TextLine> textLines = extractor.extractTextLines(
-        startPageIndex: pageNumber - 1,
-        endPageIndex: pageNumber - 1,
-      );
-      for (final line in textLines) {
-        for (final word in line.wordCollection) {
-          final Rect bounds = word.bounds;
-          print(word.text);
+  // _onTap2(PdfGestureDetails details) {
+  //   final int pageNumber = details.pageNumber;
+  //   final PdfTextExtractor extractor = PdfTextExtractor(_document!);
+  //   try {
+  //     final List<TextLine> textLines = extractor.extractTextLines(
+  //       startPageIndex: pageNumber - 1,
+  //       endPageIndex: pageNumber - 1,
+  //     );
+  //     for (final line in textLines) {
+  //       for (final word in line.wordCollection) {
+  //         final Rect bounds = word.bounds;
+  //         print(word.text);
 
-          const double tolerance = 0.0; // for more forgiving tap detection
-          final Rect expandedBounds = Rect.fromLTRB(
-            bounds.left - tolerance,
-            bounds.top - tolerance,
-            bounds.right + tolerance,
-            bounds.bottom + tolerance,
-          );
+  //         const double tolerance = 0.0; // for more forgiving tap detection
+  //         final Rect expandedBounds = Rect.fromLTRB(
+  //           bounds.left - tolerance,
+  //           bounds.top - tolerance,
+  //           bounds.right + tolerance,
+  //           bounds.bottom + tolerance,
+  //         );
 
-          if (expandedBounds.contains(details.position)) {
-            setState(() {
-              _selectedWord = word.text;
-            });
-            return;
-          }
-        }
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
+  //         if (expandedBounds.contains(details.position)) {
+  //           setState(() {
+  //             _selectedWord = word.text;
+  //           });
+  //           return;
+  //         }
+  //       }
+  //     }
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   @override
   void dispose() {

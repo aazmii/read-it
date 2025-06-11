@@ -45,6 +45,8 @@ class PdfWordExtractorState extends ConsumerState<ScyncfuncitonPdfDetail> {
           await ref.read(meaningProvider.notifier).findMeaning(details.selectedText!);
           final meaning = ref.read(meaningProvider);
           if (meaning == null) return;
+          _pdfViewerController.clearSelection();
+
           await showMeaningDialog(ref, context, meaning);
           ref.invalidate(meaningProvider);
         },

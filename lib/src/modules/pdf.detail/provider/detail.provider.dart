@@ -44,7 +44,7 @@ class PlainText extends _$PlainText {
   @override
   FutureOr<String?> build() async {
     final file = ref.watch(selectedPDFProvider);
-    final currentPage = ref.watch(pageNumProvider);
+    // final currentPage = ref.watch(pageNumProvider);
     if (file == null) return null;
 
     // final pdfDoc = await PDFDoc.fromPath(file.path);
