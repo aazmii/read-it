@@ -10,7 +10,7 @@ class MeaningProvider extends Notifier<WordMeaning?> {
   @override
   WordMeaning? build() => null;
 
-  Future<void> getMeaning(String word) async {
+  Future<void> findMeaning(String word) async {
     final source = _removeSpecialCharacters(word);
     try {
       state = e2bDictionary.words.singleWhere((word) => word.en == source);

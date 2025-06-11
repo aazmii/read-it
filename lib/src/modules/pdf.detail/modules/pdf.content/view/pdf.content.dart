@@ -37,10 +37,7 @@ class PdfContent extends ConsumerWidget {
         const SizedBox(height: 10),
         Expanded(
           child: SingleChildScrollView(
-            child: TappableText(
-              data: plainText ?? '',
-              onTap: ref.read(meaningProvider.notifier).getMeaning,
-            ),
+            child: TappableText(data: plainText ?? '', onTap: ref.read(meaningProvider.notifier).findMeaning),
           ),
         ),
       ],

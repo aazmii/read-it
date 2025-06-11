@@ -40,7 +40,7 @@ class AssistView extends ConsumerWidget {
                   child: SingleChildScrollView(
                     child: TappableText(
                       data: text ?? '',
-                      onTap: ref.read(meaningProvider.notifier).getMeaning,
+                      onTap: ref.read(meaningProvider.notifier).findMeaning,
                     ),
                   ),
                 ),

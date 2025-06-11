@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pattern_m/src/modules/pdf.detail/modules/components/meaning.dialog.dart';
+import 'package:pattern_m/src/modules/pdf.detail/modules/pdf.content/provider/meaning.provider.dart';
 import 'package:pattern_m/src/modules/pdf.detail/provider/detail.provider.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart' as viewer;
 
@@ -15,8 +17,6 @@ class ScyncfuncitonPdfDetail extends ConsumerStatefulWidget {
 
 class PdfWordExtractorState extends ConsumerState<ScyncfuncitonPdfDetail> {
   final viewer.PdfViewerController _pdfViewerController = viewer.PdfViewerController();
-  String? _selectedWord;
-  // PdfDocument? _document;
   late File file;
   @override
   void initState() {
@@ -28,15 +28,26 @@ class PdfWordExtractorState extends ConsumerState<ScyncfuncitonPdfDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('$_selectedWord')),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
       body: viewer.SfPdfViewer.file(
-        canShowTextSelectionMenu: false ,
-        pageLayoutMode: viewer.PdfPageLayoutMode.single,
         file,
+        canShowTextSelectionMenu: false,
+        pageLayoutMode: viewer.PdfPageLayoutMode.continuous,
         controller: _pdfViewerController,
-        onTextSelectionChanged: (details) => setState(() {
-          _selectedWord = details.selectedText;
-        }),
+        onDocumentLoaded: (details) {
+          viewer.PdfDocumentLoadedDetails;
+          _pdfViewerController.zoomLevel = 1.2;
+        },
+        onTextSelectionChanged: (details) async {
+          if (details.selectedText == null) return;
+          await ref.read(meaningProvider.notifier).findMeaning(details.selectedText!);
+          final meaning = ref.read(meaningProvider);
+          if (meaning == null) return;
+          await showMeaningDialog(ref, context, meaning);
+          ref.invalidate(meaningProvider);
+        },
       ),
     );
   }
