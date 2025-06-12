@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pattern_m/src/extensions/extensions.dart';
-import 'package:pattern_m/src/modules/pdf.detail/provider/detail.provider.dart';
-
-import 'component/toggle.mode.button.dart';
+import 'package:pattern_m/src/modules/pdf.viewer/provider/detail.provider.dart';
 
 class PdfDetail extends ConsumerWidget {
   const PdfDetail({super.key});
@@ -24,7 +22,6 @@ class PdfDetail extends ConsumerWidget {
                   onPressed: notifier.previous,
                 ),
                 IconButton(icon: const Icon(Icons.arrow_forward_ios), onPressed: notifier.next),
-                const ToggleModeButton(),
               ]
             : [],
       ),

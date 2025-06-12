@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pattern_m/src/extensions/extensions.dart';
-import 'package:pattern_m/src/modules/pdf.detail/provider/detail.provider.dart';
-import 'package:pattern_m/src/modules/pdf.detail/view/syncfunction.viewer/syncfunction.viewer.pdf.detail.dart';
+import 'package:pattern_m/src/modules/pdf.viewer/provider/detail.provider.dart';
+import 'package:pattern_m/src/modules/pdf.viewer/view/pdf.viewer.dart';
 
 import '../../drawer/app.drawer.dart';
 import '../provider/home.provider.dart';
