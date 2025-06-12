@@ -1,12 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
-import 'package:pattern_m/src/modules/dictionary/model/dictionary.dart';
+import 'package:pattern_m/src/modules/dictionary/model/e2bdictionary.dart';
 
-late final Dictionary e2bDictionary;
+late final E2BDictionary e2bDictionary;
 
-Future<void> initDictionary() async {
-  final jsonResponse =
-      await rootBundle.loadString('assets/dictionary/E2Bdatabase.json');
-  e2bDictionary = await compute((v) => Dictionary.fromJson(jsonResponse), null);
+Future<void> initE2BDictionary() async {
+  final jsonResponse = await rootBundle.loadString('assets/dictionary/E2Bdatabase.json');
+  e2bDictionary = await compute((v) => E2BDictionary.fromJson(jsonResponse), null);
 }

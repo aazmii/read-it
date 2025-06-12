@@ -19,5 +19,5 @@ Future<void> _init() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await openDB();
-  await initDictionary();
+  await initE2BDictionary();
 }

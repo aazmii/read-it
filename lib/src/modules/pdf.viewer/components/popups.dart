@@ -4,7 +4,7 @@ import 'package:pattern_m/src/modules/dictionary/model/word.meaning.dart';
 
 import 'meaning.display.widget.dart';
 
-Future<void> showMeaningDialog(WidgetRef ref, BuildContext context, WordMeaning meaning) async {
+Future<void> showMeaningDialog(WidgetRef ref, BuildContext context, Translation meaning) async {
   await showDialog(
     context: context,
     builder: (context) {
@@ -15,7 +15,7 @@ Future<void> showMeaningDialog(WidgetRef ref, BuildContext context, WordMeaning 
   );
 }
 
-Future showMeaningBottomSheet(BuildContext context, WordMeaning meaning) async {
+Future showMeaningBottomSheet(BuildContext context, Translation meaning) async {
   await showModalBottomSheet(
     context: context,
     builder: (BuildContext context) {

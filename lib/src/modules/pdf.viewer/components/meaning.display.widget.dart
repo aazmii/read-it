@@ -5,13 +5,13 @@ import 'package:pattern_m/src/modules/dictionary/model/word.meaning.dart';
 
 class MeaningDisplayWidget extends StatelessWidget {
   const MeaningDisplayWidget({super.key, required this.meaning});
-  final WordMeaning meaning;
+  final Translation meaning;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
       child: SizedBox(
-        height: context.height * 0.5,
+        height: context.height * 0.58,
         child: Column(
           children: [
             Expanded(
@@ -26,6 +26,7 @@ class MeaningDisplayWidget extends StatelessWidget {
                 ),
               ),
             ),
+            const Divider(),
             Expanded(
               child: CustomTextField(
                 text: meaning.bn,

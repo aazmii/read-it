@@ -4,18 +4,18 @@ import 'package:pattern_m/src/modules/dictionary/api/e2b.dictionary.dart';
 import 'package:pattern_m/src/modules/dictionary/model/word.meaning.dart';
 
 final meaningProvider =
-    NotifierProvider<MeaningProvider, WordMeaning?>(MeaningProvider.new);
+    NotifierProvider<MeaningProvider, Translation?>(MeaningProvider.new);
 
-class MeaningProvider extends Notifier<WordMeaning?> {
+class MeaningProvider extends Notifier<Translation?> {
   @override
-  WordMeaning? build() => null;
+  Translation? build() => null;
 
   Future<void> findMeaning(String word) async {
     final source = _removeSpecialCharacters(word);
     try {
       state = e2bDictionary.words.singleWhere((word) => word.en == source);
     } catch (e) {
-      state = WordMeaning(en: source, bn: source);
+      state = Translation(en: source, bn: source);
     }
   }
 
