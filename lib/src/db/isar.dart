@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart' show kReleaseMode;
 
 import 'package:isar/isar.dart' show Isar;
+import 'package:pattern_m/src/features/home/domain%20/entities/opened.file.detail.dart';
 
-import '../modules/home.dart/models/opened.file.detail.dart';
 import '../modules/setting/model/setting.model.dart' show AppSettingSchema;
 import 'paths.dart' show AppDir, appDir, initDir;
 
@@ -18,5 +18,4 @@ Future<void> openDB() async {
   );
 }
 
-void openDBSync(AppDir dir) => db =
-    Isar.openSync(_schema, inspector: !kReleaseMode, directory: dir.db.path);
+void openDBSync(AppDir dir) => db = Isar.openSync(_schema, inspector: !kReleaseMode, directory: dir.db.path);

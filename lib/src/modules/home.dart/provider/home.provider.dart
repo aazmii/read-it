@@ -2,17 +2,18 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:isar/isar.dart';
+import 'package:pattern_m/src/features/home/domain%20/entities/opened.file.detail.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:pattern_m/src/db/isar.dart';
 import 'package:pattern_m/src/extensions/extensions.dart';
-import 'package:pattern_m/src/modules/home.dart/models/opened.file.detail.dart';
 
 final recentFilesProvider = StreamProvider<List<RecentFile>>((ref) {
   return db.recentFiles.watchLazy(fireImmediately: true).asyncMap((_) async {
     return await db.recentFiles.where().findAll();
   });
 });
+
 
 Future<PlatformFile?> pickPDF() async {
   var result = await FilePicker.platform.pickFiles(
