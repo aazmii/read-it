@@ -39,7 +39,7 @@ class PdfWordExtractorState extends ConsumerState<ScyncfuncitonPdfDetail> {
                 if (_selectedText == null || _selectedText!.isEmpty) return;
                 await ref.read(meaningProvider.notifier).findMeaning(_selectedText!);
                 final meaning = ref.read(meaningProvider);
-                if (meaning == null) return;
+                if (meaning == null || !context.mounted) return;
                 await showMeaningBottomSheet(context, meaning);
                 _pdfViewerController.clearSelection();
                 setState(() => _selectedText = null);

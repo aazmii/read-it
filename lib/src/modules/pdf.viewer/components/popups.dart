@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pattern_m/src/modules/dictionary/model/word.meaning.dart';
 
-import 'meaning.display.widget.dart';
+import 'meaning.display.widget/meaning.display.widget.dart';
 
 Future<void> showMeaningDialog(WidgetRef ref, BuildContext context, Translation meaning) async {
   await showDialog(

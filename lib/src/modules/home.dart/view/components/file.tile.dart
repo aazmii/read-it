@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:pattern_m/src/extensions/extensions.dart';
 import 'package:pattern_m/src/modules/home.dart/models/opened.file.detail.dart';
 import 'package:pattern_m/src/utils/file.cover.dart';
@@ -30,7 +29,6 @@ class FileTile extends StatelessWidget {
               child: FutureBuilder<File?>(
                 future: extractCoverPage(File(file.path!)),
                 builder: (context, snapshot) {
-                  print('retriving ${snapshot.data!.path}');
                   if (snapshot.hasData) {
                     return Image.file(
                       File(snapshot.data!.path),
@@ -44,7 +42,7 @@ class FileTile extends StatelessWidget {
                 },
               ),
             ),
-            const Gap(10),
+            const SizedBox(height: 10),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
