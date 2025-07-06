@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pattern_m/src/extensions/extensions.dart';
-import 'package:pattern_m/src/modules/dictionary/model/word.meaning.dart';
+import 'package:pattern_m/src/modules/dictionary/model/word.model/word.model.dart';
 
 import 'action.panel.dart';
 import 'custom.textfield.dart';
 
 class MeaningDisplayWidget extends StatelessWidget {
-  const MeaningDisplayWidget({super.key, required this.meaning});
-  final Translation meaning;
+  const MeaningDisplayWidget({super.key, required this.word});
+  final WordModel word;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,8 +24,8 @@ class MeaningDisplayWidget extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(child: CustomTextField(text: meaning.en)),
-                    ActionPanel(meaning: meaning),
+                    Expanded(child: CustomTextField(text: word.word!)),
+                    ActionPanel(text: word.word),
                   ],
                 ),
               ),
@@ -33,7 +33,7 @@ class MeaningDisplayWidget extends StatelessWidget {
             const Divider(),
             Expanded(
               child: CustomTextField(
-                text: meaning.bn,
+                text: word.meanings?.first.definitions?.first.definition ?? '',
                 readOnly: true,
                 // showLoader: true,
               ),

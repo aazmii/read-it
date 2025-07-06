@@ -17,23 +17,28 @@ const RecentFileSchema = CollectionSchema(
   name: r'RecentFile',
   id: 428040767606462206,
   properties: {
-    r'fileData': PropertySchema(
+    r'converPath': PropertySchema(
       id: 0,
+      name: r'converPath',
+      type: IsarType.string,
+    ),
+    r'fileData': PropertySchema(
+      id: 1,
       name: r'fileData',
       type: IsarType.byteList,
     ),
     r'isLastOpened': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'isLastOpened',
       type: IsarType.bool,
     ),
     r'lastOpen': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'lastOpen',
       type: IsarType.dateTime,
     ),
     r'path': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'path',
       type: IsarType.string,
     )
@@ -59,6 +64,12 @@ int _recentFileEstimateSize(
 ) {
   var bytesCount = offsets.last;
   {
+    final value = object.converPath;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.fileData;
     if (value != null) {
       bytesCount += 3 + value.length;
@@ -79,10 +90,11 @@ void _recentFileSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeByteList(offsets[0], object.fileData);
-  writer.writeBool(offsets[1], object.isLastOpened);
-  writer.writeDateTime(offsets[2], object.lastOpen);
-  writer.writeString(offsets[3], object.path);
+  writer.writeString(offsets[0], object.converPath);
+  writer.writeByteList(offsets[1], object.fileData);
+  writer.writeBool(offsets[2], object.isLastOpened);
+  writer.writeDateTime(offsets[3], object.lastOpen);
+  writer.writeString(offsets[4], object.path);
 }
 
 RecentFile _recentFileDeserialize(
@@ -92,11 +104,12 @@ RecentFile _recentFileDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = RecentFile(
-    fileData: reader.readByteList(offsets[0]),
-    isLastOpened: reader.readBoolOrNull(offsets[1]),
-    lastOpen: reader.readDateTimeOrNull(offsets[2]),
-    path: reader.readStringOrNull(offsets[3]),
+    fileData: reader.readByteList(offsets[1]),
+    isLastOpened: reader.readBoolOrNull(offsets[2]),
+    lastOpen: reader.readDateTimeOrNull(offsets[3]),
+    path: reader.readStringOrNull(offsets[4]),
   );
+  object.converPath = reader.readStringOrNull(offsets[0]);
   object.id = id;
   return object;
 }
@@ -109,12 +122,14 @@ P _recentFileDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readByteList(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 1:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readByteList(offset)) as P;
     case 2:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 3:
+      return (reader.readDateTimeOrNull(offset)) as P;
+    case 4:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -212,6 +227,159 @@ extension RecentFileQueryWhere
 
 extension RecentFileQueryFilter
     on QueryBuilder<RecentFile, RecentFile, QFilterCondition> {
+  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
+      converPathIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'converPath',
+      ));
+    });
+  }
+
+  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
+      converPathIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'converPath',
+      ));
+    });
+  }
+
+  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> converPathEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'converPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
+      converPathGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'converPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
+      converPathLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'converPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> converPathBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'converPath',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
+      converPathStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'converPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
+      converPathEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'converPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
+      converPathContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'converPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> converPathMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'converPath',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
+      converPathIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'converPath',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
+      converPathIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'converPath',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> fileDataIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -681,6 +849,18 @@ extension RecentFileQueryLinks
 
 extension RecentFileQuerySortBy
     on QueryBuilder<RecentFile, RecentFile, QSortBy> {
+  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> sortByConverPath() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'converPath', Sort.asc);
+    });
+  }
+
+  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> sortByConverPathDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'converPath', Sort.desc);
+    });
+  }
+
   QueryBuilder<RecentFile, RecentFile, QAfterSortBy> sortByIsLastOpened() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isLastOpened', Sort.asc);
@@ -720,6 +900,18 @@ extension RecentFileQuerySortBy
 
 extension RecentFileQuerySortThenBy
     on QueryBuilder<RecentFile, RecentFile, QSortThenBy> {
+  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> thenByConverPath() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'converPath', Sort.asc);
+    });
+  }
+
+  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> thenByConverPathDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'converPath', Sort.desc);
+    });
+  }
+
   QueryBuilder<RecentFile, RecentFile, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
@@ -771,6 +963,13 @@ extension RecentFileQuerySortThenBy
 
 extension RecentFileQueryWhereDistinct
     on QueryBuilder<RecentFile, RecentFile, QDistinct> {
+  QueryBuilder<RecentFile, RecentFile, QDistinct> distinctByConverPath(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'converPath', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<RecentFile, RecentFile, QDistinct> distinctByFileData() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'fileData');
@@ -802,6 +1001,12 @@ extension RecentFileQueryProperty
   QueryBuilder<RecentFile, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<RecentFile, String?, QQueryOperations> converPathProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'converPath');
     });
   }
 

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:pattern_m/src/modules/dictionary/model/word.meaning.dart';
 
 class ActionPanel extends StatefulWidget {
-  const ActionPanel({super.key, this.meaning});
-  final Translation? meaning;
+  const ActionPanel({super.key, this.text});
+  final String? text;
   @override
   State<ActionPanel> createState() => _ActionPanelState();
 }
@@ -26,9 +25,9 @@ class _ActionPanelState extends State<ActionPanel> {
       children: [
         IconButton(
           onPressed: () async {
-            if (widget.meaning?.en == null) return;
+            if (widget.text == null) return;
             // print(await _flutterTts.getLanguages);
-            _flutterTts.speak(widget.meaning!.en);
+            _flutterTts.speak(widget.text!);
           },
           icon: SvgPicture.asset(
             'assets/icons/volume_solid.svg',

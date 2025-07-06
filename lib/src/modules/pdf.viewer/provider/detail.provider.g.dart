@@ -6,6 +6,20 @@ part of 'detail.provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+String _$httpClientHash() => r'0018671068aceb0daf1eb01008101c1f4b4ad533';
+
+/// See also [httpClient].
+@ProviderFor(httpClient)
+final httpClientProvider = AutoDisposeProvider<http.Client>.internal(
+  httpClient,
+  name: r'httpClientProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$httpClientHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef HttpClientRef = AutoDisposeProviderRef<http.Client>;
 String _$selectedPDFHash() => r'a509c4ca566dc58cdbb02b5904f1ccb21dae12ff';
 
 /// See also [SelectedPDF].
@@ -62,7 +76,7 @@ final pageNumProvider = AutoDisposeNotifierProvider<PageNum, int>.internal(
 );
 
 typedef _$PageNum = AutoDisposeNotifier<int>;
-String _$plainTextHash() => r'010604dbf7f085d2638cd9df0911acd33831713b';
+String _$plainTextHash() => r'd26668a588718fe750269b51bcfd3f271329ab74';
 
 /// See also [PlainText].
 @ProviderFor(PlainText)

@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:http/http.dart' as http;
 // import 'package:pdf_text/pdf_text.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -52,4 +52,11 @@ class PlainText extends _$PlainText {
     // return await pdfDoc.pageAt(currentPage + 1).text;
     return null;
   }
+}
+
+@riverpod
+http.Client httpClient(HttpClientRef ref) {
+  final client = http.Client();
+  ref.onDispose(() => client.close());
+  return http.Client();
 }
