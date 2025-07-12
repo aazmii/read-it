@@ -11,3 +11,4 @@ part 'src/iterable.dart';
 part 'src/string.dart';
 part 'src/object.dart';
 part 'src/file.dart';
+part 'src/int.dart';

@@ -17,7 +17,7 @@ class WordModel with _$WordModel {
 @freezed
 class Meaning with _$Meaning {
   const factory Meaning({
-    String? partsOfSpeech,
+    String? partOfSpeech,
     List<Definition>? definitions,
   }) = _Meaning;
 

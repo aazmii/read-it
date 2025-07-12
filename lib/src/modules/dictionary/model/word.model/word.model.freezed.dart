@@ -226,7 +226,7 @@ Meaning _$MeaningFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Meaning {
-  String? get partsOfSpeech => throw _privateConstructorUsedError;
+  String? get partOfSpeech => throw _privateConstructorUsedError;
   List<Definition>? get definitions => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -239,7 +239,7 @@ abstract class $MeaningCopyWith<$Res> {
   factory $MeaningCopyWith(Meaning value, $Res Function(Meaning) then) =
       _$MeaningCopyWithImpl<$Res, Meaning>;
   @useResult
-  $Res call({String? partsOfSpeech, List<Definition>? definitions});
+  $Res call({String? partOfSpeech, List<Definition>? definitions});
 }
 
 /// @nodoc
@@ -255,13 +255,13 @@ class _$MeaningCopyWithImpl<$Res, $Val extends Meaning>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? partsOfSpeech = freezed,
+    Object? partOfSpeech = freezed,
     Object? definitions = freezed,
   }) {
     return _then(_value.copyWith(
-      partsOfSpeech: freezed == partsOfSpeech
-          ? _value.partsOfSpeech
-          : partsOfSpeech // ignore: cast_nullable_to_non_nullable
+      partOfSpeech: freezed == partOfSpeech
+          ? _value.partOfSpeech
+          : partOfSpeech // ignore: cast_nullable_to_non_nullable
               as String?,
       definitions: freezed == definitions
           ? _value.definitions
@@ -278,7 +278,7 @@ abstract class _$$MeaningImplCopyWith<$Res> implements $MeaningCopyWith<$Res> {
       __$$MeaningImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? partsOfSpeech, List<Definition>? definitions});
+  $Res call({String? partOfSpeech, List<Definition>? definitions});
 }
 
 /// @nodoc
@@ -292,13 +292,13 @@ class __$$MeaningImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? partsOfSpeech = freezed,
+    Object? partOfSpeech = freezed,
     Object? definitions = freezed,
   }) {
     return _then(_$MeaningImpl(
-      partsOfSpeech: freezed == partsOfSpeech
-          ? _value.partsOfSpeech
-          : partsOfSpeech // ignore: cast_nullable_to_non_nullable
+      partOfSpeech: freezed == partOfSpeech
+          ? _value.partOfSpeech
+          : partOfSpeech // ignore: cast_nullable_to_non_nullable
               as String?,
       definitions: freezed == definitions
           ? _value._definitions
@@ -311,14 +311,14 @@ class __$$MeaningImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$MeaningImpl implements _Meaning {
-  const _$MeaningImpl({this.partsOfSpeech, final List<Definition>? definitions})
+  const _$MeaningImpl({this.partOfSpeech, final List<Definition>? definitions})
       : _definitions = definitions;
 
   factory _$MeaningImpl.fromJson(Map<String, dynamic> json) =>
       _$$MeaningImplFromJson(json);
 
   @override
-  final String? partsOfSpeech;
+  final String? partOfSpeech;
   final List<Definition>? _definitions;
   @override
   List<Definition>? get definitions {
@@ -331,7 +331,7 @@ class _$MeaningImpl implements _Meaning {
 
   @override
   String toString() {
-    return 'Meaning(partsOfSpeech: $partsOfSpeech, definitions: $definitions)';
+    return 'Meaning(partOfSpeech: $partOfSpeech, definitions: $definitions)';
   }
 
   @override
@@ -339,15 +339,15 @@ class _$MeaningImpl implements _Meaning {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MeaningImpl &&
-            (identical(other.partsOfSpeech, partsOfSpeech) ||
-                other.partsOfSpeech == partsOfSpeech) &&
+            (identical(other.partOfSpeech, partOfSpeech) ||
+                other.partOfSpeech == partOfSpeech) &&
             const DeepCollectionEquality()
                 .equals(other._definitions, _definitions));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, partsOfSpeech,
+  int get hashCode => Object.hash(runtimeType, partOfSpeech,
       const DeepCollectionEquality().hash(_definitions));
 
   @JsonKey(ignore: true)
@@ -366,13 +366,13 @@ class _$MeaningImpl implements _Meaning {
 
 abstract class _Meaning implements Meaning {
   const factory _Meaning(
-      {final String? partsOfSpeech,
+      {final String? partOfSpeech,
       final List<Definition>? definitions}) = _$MeaningImpl;
 
   factory _Meaning.fromJson(Map<String, dynamic> json) = _$MeaningImpl.fromJson;
 
   @override
-  String? get partsOfSpeech;
+  String? get partOfSpeech;
   @override
   List<Definition>? get definitions;
   @override

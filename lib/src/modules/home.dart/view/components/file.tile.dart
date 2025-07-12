@@ -26,21 +26,22 @@ class FileTile extends StatelessWidget {
           children: [
             SizedBox(
               width: 100,
-              child: FutureBuilder<File?>(
-                future: extractCoverPage(File(file.path!)),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return Image.file(
-                      File(snapshot.data!.path),
-                      width: 120,
-                      height: 160,
-                      fit: BoxFit.cover,
-                    );
-                  } else {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                },
-              ),
+              child: Placeholder(),
+              // child: FutureBuilder<File?>(
+              //   future: extractCoverPage(File(file.path!)),
+              //   builder: (context, snapshot) {
+              //     if (snapshot.hasData) {
+              //       return Image.file(
+              //         File(snapshot.data!.path),
+              //         width: 120,
+              //         height: 160,
+              //         fit: BoxFit.cover,
+              //       );
+              //     } else {
+              //       return const Center(child: CircularProgressIndicator());
+              //     }
+              //   },
+              // ),
             ),
             const SizedBox(height: 10),
             Expanded(

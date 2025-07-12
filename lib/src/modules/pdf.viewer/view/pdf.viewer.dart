@@ -3,10 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pattern_m/src/modules/dictionary/api/dictionary.api.dart';
-import 'package:pattern_m/src/modules/pdf.viewer/components/popups.dart';
 import 'package:pattern_m/src/modules/pdf.viewer/provider/detail.provider.dart';
 import 'package:pattern_m/src/modules/pdf.viewer/provider/meaning.provider.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart' as viewer;
+
+import '../components/word.bottom.sheet/word.meaning.bottomsheet.dart';
 
 //DEEPSEEK
 class ScyncfuncitonPdfDetail extends ConsumerStatefulWidget {
@@ -43,7 +44,7 @@ class PdfWordExtractorState extends ConsumerState<ScyncfuncitonPdfDetail> {
                 final word = await DictionaryApi(client).fetchMeaning(_selectedText!);
                 // await ref.read(meaningProvider.notifier).findMeaning(_selectedText!);
                 if (word == null || !context.mounted) return;
-                await showMeaningBottomSheet(context, word);
+                await showWordBottomSheet(context, word);
                 _pdfViewerController.clearSelection();
                 setState(() => _selectedText = null);
                 if (!context.mounted) return;

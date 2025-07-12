@@ -26,7 +26,7 @@ Map<String, dynamic> _$$WordModelImplToJson(_$WordModelImpl instance) =>
 
 _$MeaningImpl _$$MeaningImplFromJson(Map<String, dynamic> json) =>
     _$MeaningImpl(
-      partsOfSpeech: json['partsOfSpeech'] as String?,
+      partOfSpeech: json['partOfSpeech'] as String?,
       definitions: (json['definitions'] as List<dynamic>?)
           ?.map((e) => Definition.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -34,7 +34,7 @@ _$MeaningImpl _$$MeaningImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$MeaningImplToJson(_$MeaningImpl instance) =>
     <String, dynamic>{
-      'partsOfSpeech': instance.partsOfSpeech,
+      'partOfSpeech': instance.partOfSpeech,
       'definitions': instance.definitions,
     };
 

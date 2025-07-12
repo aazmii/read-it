@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:pattern_m/src/modules/dictionary/model/word.model/word.model.dart';
@@ -14,6 +15,8 @@ class DictionaryApi {
     final response = await client.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
+      log('message : ${response.body}');
+
       final data = jsonDecode(response.body) as List<dynamic>;
       return WordModel.fromJson(data.first);
     } else {
