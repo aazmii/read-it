@@ -43,15 +43,23 @@ class WordMeaningBttomsheetBody extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text(
-                          word.word?.capitalize ?? '',
-                          style: context.text.titleLarge!.copyWith(
-                            fontWeight: FontWeight.bold,
+                        Expanded(
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                Text(
+                                  word.word?.capitalize ?? '',
+                                  style: context.text.titleLarge!.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                6.toWidth,
+                                Text(word.phonetic ?? ''),
+                              ],
+                            ),
                           ),
                         ),
-                        6.toWidth,
-                        Text(word.phonetic ?? ''),
-                        const Spacer(),
                         IconButton(onPressed: () {}, icon: const Icon(Icons.copy)),
                         IconButton(onPressed: () {}, icon: const Icon(Icons.bookmark)),
                         IconButton(onPressed: () {}, icon: const Icon(Icons.send)),

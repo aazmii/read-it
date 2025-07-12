@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:pattern_m/src/extensions/extensions.dart';
 import 'package:pattern_m/src/modules/home.dart/models/opened.file.detail.dart';
-import 'package:pattern_m/src/utils/file.cover.dart';
 
 class FileTile extends StatelessWidget {
   const FileTile({super.key, required this.file, this.onPressed});
