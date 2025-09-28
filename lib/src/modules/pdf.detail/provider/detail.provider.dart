@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:pdf_text/pdf_text.dart';
+// import 'package:pdf_text/pdf_text.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'detail.provider.g.dart';
@@ -40,16 +40,16 @@ class PageNum extends _$PageNum {
   void setPage(int pageNo) => state = pageNo;
 }
 
-@riverpod
-class PlainText extends _$PlainText {
-  @override
-  FutureOr<String?> build() async {
-    final file = ref.watch(selectedPDFProvider);
-    final currentPage = ref.watch(pageNumProvider);
-    if (file == null) return null;
+// @riverpod
+// class PlainText extends _$PlainText {
+//   @override
+//   FutureOr<String?> build() async {
+//     final file = ref.watch(selectedPDFProvider);
+//     final currentPage = ref.watch(pageNumProvider);
+//     if (file == null) return null;
 
-    final pdfDoc = await PDFDoc.fromPath(file.path);
+//     final pdfDoc = await PDFDoc.fromPath(file.path);
 
-    return await pdfDoc.pageAt(currentPage + 1).text;
-  }
-}
+//     return await pdfDoc.pageAt(currentPage + 1).text;
+//   }
+// }
