@@ -4,7 +4,6 @@ import 'package:pattern_m/src/modules/dictionary/model/word.meaning.dart';
 import 'package:pattern_m/src/modules/dictionary/model/word.model/word.model.dart';
 
 import 'meaning.display.widget/meaning.display.widget.dart';
-import 'word.bottom.sheet/word.meaning.bottomsheet.dart';
 
 Future<void> showMeaningDialog(WidgetRef ref, BuildContext context, WordModel word, {Translation? meaning}) async {
   await showDialog(
