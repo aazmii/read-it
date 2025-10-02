@@ -97,7 +97,7 @@ abstract class AppLocalizations {
   /// The title of the application
   ///
   /// In en, this message translates to:
-  /// **'pattern_m'**
+  /// **'read_it'**
   String get appTitle;
 
   /// Setting

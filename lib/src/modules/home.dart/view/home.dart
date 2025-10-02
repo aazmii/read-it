@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pattern_m/src/extensions/extensions.dart';
-import 'package:pattern_m/src/modules/pdf.viewer/provider/detail.provider.dart';
-import 'package:pattern_m/src/modules/pdf.viewer/view/pdf.viewer.dart';
+import 'package:read_it/src/extensions/extensions.dart';
+import 'package:read_it/src/modules/pdf.viewer/provider/detail.provider.dart';
+import 'package:read_it/src/modules/pdf.viewer/view/pdf.viewer.dart';
 
 import '../../drawer/app.drawer.dart';
 import '../provider/home.provider.dart';
@@ -16,6 +16,7 @@ class Home extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     // return PdfWordExtractor();
+   
     return Scaffold(
       drawer: const AppDrawer(),
       appBar: AppBar(),

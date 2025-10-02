@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pattern_m/src/modules/dictionary/api/dictionary.api.dart';
-import 'package:pattern_m/src/modules/pdf.viewer/provider/detail.provider.dart';
-import 'package:pattern_m/src/modules/pdf.viewer/provider/meaning.provider.dart';
+import 'package:read_it/src/modules/dictionary/api/dictionary.api.dart';
+import 'package:read_it/src/modules/pdf.viewer/provider/detail.provider.dart';
+import 'package:read_it/src/modules/pdf.viewer/provider/meaning.provider.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart' as viewer;
 
 import '../components/word.bottom.sheet/word.meaning.bottomsheet.dart';

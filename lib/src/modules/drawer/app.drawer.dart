@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:pattern_m/src/modules/router/provider/route.provider.dart';
-import 'package:pattern_m/src/modules/setting/view/setting.view.dart';
+import 'package:read_it/src/modules/router/provider/route.provider.dart';
+import 'package:read_it/src/modules/setting/view/setting.view.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});

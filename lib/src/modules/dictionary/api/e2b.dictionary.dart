@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
-import 'package:pattern_m/src/modules/dictionary/model/e2bdictionary.dart';
+import 'package:read_it/src/modules/dictionary/model/e2bdictionary.dart';
 
 late final E2BDictionary e2bDictionary;
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pattern_m/src/theme/themes/themes.dart';
+import 'package:read_it/src/theme/themes/themes.dart';
 
 ThemeData get darkTheme => ThemeData(
       visualDensity: VisualDensity.compact,

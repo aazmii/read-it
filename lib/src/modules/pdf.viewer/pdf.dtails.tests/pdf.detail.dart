@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pattern_m/src/extensions/extensions.dart';
-import 'package:pattern_m/src/modules/pdf.viewer/provider/detail.provider.dart';
+import 'package:read_it/src/extensions/extensions.dart';
+import 'package:read_it/src/modules/pdf.viewer/provider/detail.provider.dart';
 
 class PdfDetail extends ConsumerWidget {
   const PdfDetail({super.key});

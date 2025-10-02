@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:http/http.dart' as http;
-import 'package:pattern_m/src/modules/dictionary/model/word.model/word.model.dart';
+import 'package:read_it/src/modules/dictionary/model/word.model/word.model.dart';
 
 class DictionaryApi {
   DictionaryApi(this.client);

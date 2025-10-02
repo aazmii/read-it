@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' show BuildContext, MaterialApp, MediaQuery, TextScaler, Widget;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget, WidgetRef;
-import 'package:pattern_m/src/localization/app_localizations.dart';
+import 'package:read_it/src/localization/app_localizations.dart';
 
 import 'constants/constants.dart' show appName;
 import 'extensions/extensions.dart' show BuildContextExtension;

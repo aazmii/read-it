@@ -1,4 +1,4 @@
-package com.example.pattern_m
+package com.example.read_it
 
 import io.flutter.embedding.android.FlutterActivity
 

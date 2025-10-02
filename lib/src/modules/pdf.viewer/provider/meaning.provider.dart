@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:pattern_m/src/modules/dictionary/api/e2b.dictionary.dart';
-import 'package:pattern_m/src/modules/dictionary/model/word.meaning.dart';
+import 'package:read_it/src/modules/dictionary/api/e2b.dictionary.dart';
+import 'package:read_it/src/modules/dictionary/model/word.meaning.dart';
 
 final meaningProvider =
     NotifierProvider<MeaningProvider, Translation?>(MeaningProvider.new);

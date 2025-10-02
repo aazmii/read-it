@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pattern_m/src/modules/pdf.viewer/provider/detail.provider.dart';
+import 'package:read_it/src/modules/pdf.viewer/provider/detail.provider.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 
 class SyncfunctinoWordBox extends ConsumerStatefulWidget {

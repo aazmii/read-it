@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pattern_m/src/extensions/extensions.dart';
-import 'package:pattern_m/src/modules/dictionary/model/word.model/word.model.dart';
+import 'package:read_it/src/extensions/extensions.dart';
+import 'package:read_it/src/modules/dictionary/model/word.model/word.model.dart';
 
 import 'action.panel.dart';
 import 'custom.textfield.dart';

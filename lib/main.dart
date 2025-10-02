@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' show WidgetsFlutterBinding, runApp;
 import 'package:flutter/services.dart' show DeviceOrientation, SystemChrome;
 import 'package:flutter_riverpod/flutter_riverpod.dart' show ProviderScope;
-import 'package:pattern_m/src/modules/dictionary/api/e2b.dictionary.dart';
+import 'package:read_it/src/modules/dictionary/api/e2b.dictionary.dart';
 
 import 'src/app.dart' show MyApp;
 import 'src/db/isar.dart' show openDB;
