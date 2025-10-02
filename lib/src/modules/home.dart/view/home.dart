@@ -8,7 +8,7 @@ import 'package:read_it/src/modules/pdf.viewer/view/pdf.viewer.dart';
 
 import '../../drawer/app.drawer.dart';
 import '../provider/home.provider.dart';
-import 'components/file.tile.dart';
+import 'components/recent.file.tile.dart';
 
 class Home extends ConsumerWidget {
   const Home({super.key});
@@ -56,7 +56,7 @@ class Home extends ConsumerWidget {
                             final recentFile = recentFiles[index];
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: FileTile(
+                              child: RecentFileTile(
                                 file: recentFile,
                                 onPressed: () async {
                                   ref.read(selectedPDFProvider.notifier).update = File(recentFile.path!);

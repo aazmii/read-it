@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:read_it/src/extensions/extensions.dart';
 import 'package:read_it/src/modules/home.dart/models/opened.file.detail.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart' as syncviewer;
 
-class FileTile extends StatelessWidget {
-  const FileTile({super.key, required this.file, this.onPressed});
+class RecentFileTile extends StatelessWidget {
+  const RecentFileTile({super.key, required this.file, this.onPressed});
   final RecentFile file;
   final VoidCallback? onPressed;
 
@@ -23,24 +26,25 @@ class FileTile extends StatelessWidget {
           children: [
             SizedBox(
               width: 100,
-              child: Placeholder(),
-              // child: FutureBuilder<File?>(
-              //   future: extractCoverPage(File(file.path!)),
-              //   builder: (context, snapshot) {
-              //     if (snapshot.hasData) {
-              //       return Image.file(
-              //         File(snapshot.data!.path),
-              //         width: 120,
-              //         height: 160,
-              //         fit: BoxFit.cover,
-              //       );
-              //     } else {
-              //       return const Center(child: CircularProgressIndicator());
-              //     }
-              //   },
-              // ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: syncviewer.SfPdfViewer.file(
+                  File(file.path!),
+                  canShowTextSelectionMenu: false,
+                  pageLayoutMode: syncviewer.PdfPageLayoutMode.continuous,
+                  canShowPageLoadingIndicator: false,
+                  canShowScrollStatus: false,
+                  canShowScrollHead: false,
+                  pageSpacing: 0,
+                  enableDoubleTapZooming: false,
+                  enableTextSelection: false,
+                  enableDocumentLinkAnnotation: false,
+                  enableHyperlinkNavigation: false,
+                  initialZoomLevel: 1.0,
+                ),
+              ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(width: 10),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
