@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:read_it/src/extensions/extensions.dart';
-import 'package:read_it/src/modules/home.dart/view/home/recent.files.list.dart';
+import 'package:read_it/src/modules/home.dart/view/components/all.readable.file.section/readable.file.list.dart';
+import 'package:read_it/src/modules/home.dart/view/components/recent.files.section/recent.files.list.dart';
 import 'package:read_it/src/modules/pdf.viewer/provider/detail.provider.dart';
 import 'package:read_it/src/modules/pdf.viewer/view/pdf.viewer.dart';
 
@@ -37,17 +38,13 @@ class Home extends ConsumerWidget {
     return Scaffold(
       drawer: const AppDrawer(),
       appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      body: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text('Recently Opened', style: context.text.titleMedium), const Icon(Icons.arrow_forward_ios)],
-            ),
-            const SizedBox(height: 10),
-            const SizedBox(height: 180, child: RecentFileList())
+            RecentFileList(),
+            Expanded(child: ReadableFilesGridList()),
           ],
         ),
       ),

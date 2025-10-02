@@ -6,6 +6,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   flutter_tts
   isar_flutter_libs
   pdfx
+  permission_handler_windows
   syncfusion_pdfviewer_windows
   url_launcher_windows
 )
