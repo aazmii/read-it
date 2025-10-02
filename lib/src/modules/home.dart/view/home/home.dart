@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:read_it/src/extensions/extensions.dart';
+import 'package:read_it/src/modules/home.dart/view/home/recent.files.list.dart';
 import 'package:read_it/src/modules/pdf.viewer/provider/detail.provider.dart';
 import 'package:read_it/src/modules/pdf.viewer/view/pdf.viewer.dart';
 
-import '../../drawer/app.drawer.dart';
-import '../provider/home.provider.dart';
-import 'components/recent.file.tile.dart';
+import '../../../drawer/app.drawer.dart';
+import '../../provider/home.provider.dart';
 
 class Home extends ConsumerWidget {
   const Home({super.key});
@@ -42,40 +42,12 @@ class Home extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Recently Opened',
-              style: context.text.headlineSmall,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [Text('Recently Opened', style: context.text.titleMedium), const Icon(Icons.arrow_forward_ios)],
             ),
-            Expanded(
-              child: ref.watch(recentFilesProvider).when(
-                    data: (recentFiles) {
-                      return ListView(
-                        children: List.generate(
-                          recentFiles.length,
-                          (index) {
-                            final recentFile = recentFiles[index];
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: RecentFileTile(
-                                file: recentFile,
-                                onPressed: () async {
-                                  ref.read(selectedPDFProvider.notifier).update = File(recentFile.path!);
-                                  context.push(const ScyncfuncitonPdfDetail());
-
-                                  // await fadePush(context, const SyncfunctinoWordBox());
-                                  // await fadePush(context, const PdfWordExtractor());
-                                  // await fadePush(context, const PdfDetail());
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                      );
-                    },
-                    error: (e, s) => const Text('err'),
-                    loading: () => const Text('Loading'),
-                  ),
-            ),
+            const SizedBox(height: 10),
+            const SizedBox(height: 180, child: RecentFileList())
           ],
         ),
       ),
