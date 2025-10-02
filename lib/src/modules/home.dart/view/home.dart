@@ -16,7 +16,24 @@ class Home extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     // return PdfWordExtractor();
-   
+    // AdaptiveTextSelectionToolbar(
+    //   anchors: textSelectionToolbarAnchor, // The position where the toolbar should appear
+    //   children: [
+    //     TextSelectionToolbarButton(
+    //       onPressed: () {
+    //         // Implement copy logic
+    //       },
+    //       child: const Text('Copy'),
+    //     ),
+    //     TextSelectionToolbarButton(
+    //       onPressed: () {
+    //         // Implement paste logic
+    //       },
+    //       child: const Text('Paste'),
+    //     ),
+    //     // Add more custom buttons as needed
+    //   ],
+    // );
     return Scaffold(
       drawer: const AppDrawer(),
       appBar: AppBar(),
