@@ -44,7 +44,7 @@ class Home extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             RecentFileList(),
-            Expanded(child: ReadableFilesGridList()),
+            Expanded(child: StorageFilesGridList()),
           ],
         ),
       ),

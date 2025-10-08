@@ -5,14 +5,14 @@ import 'package:read_it/src/modules/home.dart/view/components/all.readable.file.
 
 import 'empty.file.placeholder.dart' show EmptyFilePlaceholder;
 
-class ReadableFilesGridList extends StatefulWidget {
-  const ReadableFilesGridList({super.key});
+class StorageFilesGridList extends StatefulWidget {
+  const StorageFilesGridList({super.key});
 
   @override
-  State<ReadableFilesGridList> createState() => _ReadableFilesGridListState();
+  State<StorageFilesGridList> createState() => _ReadableFilesGridListState();
 }
 
-class _ReadableFilesGridListState extends State<ReadableFilesGridList> {
+class _ReadableFilesGridListState extends State<StorageFilesGridList> {
   List<ReadableFile> _files = [];
   bool _isLoading = true;
   String _errorMessage = '';
@@ -20,10 +20,11 @@ class _ReadableFilesGridListState extends State<ReadableFilesGridList> {
   @override
   void initState() {
     super.initState();
-    _loadFiles();
+    _loadFilesFromStorage();
+    FileScanner.debugDownloadDirectory();
   }
 
-  Future<void> _loadFiles() async {
+  Future<void> _loadFilesFromStorage() async {
     setState(() {
       _isLoading = true;
       _errorMessage = '';
@@ -39,7 +40,7 @@ class _ReadableFilesGridListState extends State<ReadableFilesGridList> {
       });
     } catch (e) {
       setState(() {
-        _errorMessage = e.toString();
+        _errorMessage = 'Could not access storage. Use "Add Files" button.';
         _isLoading = false;
       });
     }
@@ -48,8 +49,8 @@ class _ReadableFilesGridListState extends State<ReadableFilesGridList> {
   @override
   Widget build(BuildContext context) {
     if (_isLoading) const Center(child: CircularProgressIndicator());
-    if (_errorMessage.isNotEmpty) return ErrorPlacehoder(onRetry: _loadFiles, msg: _errorMessage);
-    if (_files.isEmpty) return EmptyFilePlaceholder(onRetry: _loadFiles);
+    if (_errorMessage.isNotEmpty) return ErrorPlacehoder(onRetry: _loadFilesFromStorage, msg: _errorMessage);
+    if (_files.isEmpty) return EmptyFilePlaceholder(onRetry: _loadFilesFromStorage);
 
     return GridView.builder(
       padding: const EdgeInsets.all(16),

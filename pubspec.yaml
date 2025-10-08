@@ -6,7 +6,7 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.3.3 <4.0.0'
+  sdk: ">=3.3.3 <4.0.0"
 
 dependencies:
   flutter:
@@ -24,9 +24,9 @@ dependencies:
   riverpod_annotation: ^2.3.5
   file_picker: ^8.1.2
   # pdf_text: ^0.5.0
-  # pdf_text: 
+  # pdf_text:
   #   path: packages/flutter_pdf_text
-  # pdf_text: 
+  # pdf_text:
   #   git : https://github.com/anasmj/flutter-pdf-text.git
   # flutter_pdfview: ^1.3.2
   flutter_launcher_icons: ^0.13.1
@@ -36,12 +36,13 @@ dependencies:
   lottie: ^3.3.1
   flutter_svg: ^2.1.0
   flutter_tts: ^4.2.3
- 
- 
+
   http: ^1.4.0
   pdfx: ^2.9.2
   permission_handler: ^12.0.1
- 
+  cross_file: ^0.3.3
+  open_file: ^3.2.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -52,20 +53,17 @@ dev_dependencies:
   import_sorter: ^4.6.0
   # analyzer: ^6.9.0
 
- 
-
 flutter_launcher_icons:
-
   android: "launcher_icon"
   ios: false
   image_path: "assets/images/app.icon/app_icon.png"
-  min_sdk_android: 21 
+  min_sdk_android: 21
 
   windows:
     generate: true
     image_path: "assets/images/app.icon/app_icon.png"
     icon_size: 48 # min:48, max:256, default: 48
-    
+
   macos:
     generate: false
     image_path: "assets/images/app.icon/app_icon.png"
@@ -84,7 +82,6 @@ flutter:
     - assets/pdf/
     - assets/icons/
     - assets/lotties/
-
 
 import_sorter:
   comments: false
