@@ -1,5 +1,8 @@
+import 'dart:typed_data' show Uint8List;
+
 import 'package:flutter/material.dart';
 import 'package:read_it/src/modules/home.dart/models/readable.file.dart';
+import 'package:read_it/src/modules/home.dart/provider/pdf.to.image.dart';
 import 'package:read_it/src/modules/home.dart/services/file.scanner.dart';
 import 'package:read_it/src/modules/home.dart/view/components/all.readable.file.section/error.placeholder.dart';
 
@@ -21,7 +24,6 @@ class _ReadableFilesGridListState extends State<StorageFilesGridList> {
   void initState() {
     super.initState();
     _loadFilesFromStorage();
-    FileScanner.debugDownloadDirectory();
   }
 
   Future<void> _loadFilesFromStorage() async {
@@ -72,7 +74,7 @@ class _ReadableFilesGridListState extends State<StorageFilesGridList> {
   }
 }
 
-class _FileGridItem extends StatelessWidget {
+class _FileGridItem extends StatefulWidget {
   final ReadableFile file;
   final VoidCallback onTap;
 
@@ -82,11 +84,29 @@ class _FileGridItem extends StatelessWidget {
   });
 
   @override
+  State<_FileGridItem> createState() => _FileGridItemState();
+}
+
+Uint8List? imageBytes;
+
+class _FileGridItemState extends State<_FileGridItem> {
+  @override
+  void initState() {
+    super.initState();
+    _loadImage();
+  }
+
+  _loadImage() async {
+    imageBytes = await getPdfPageImageBytes(pdfFilePath: widget.file.path);
+    if (mounted) setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
       child: InkWell(
-        onTap: onTap,
+        onTap: widget.onTap,
         borderRadius: BorderRadius.circular(12),
         child: Padding(
           padding: const EdgeInsets.all(12),
@@ -98,31 +118,37 @@ class _FileGridItem extends StatelessWidget {
                 height: 120,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: _getFileColor(file.extension),
+                  color: imageBytes == null ? _getFileColor(widget.file.extension) : null,
                   borderRadius: BorderRadius.circular(8),
+                  image: imageBytes != null
+                      ? DecorationImage(
+                          image: MemoryImage(imageBytes!),
+                          fit: BoxFit.cover,
+                        )
+                      : null,
                 ),
-                child: Center(
-                  child: Icon(
-                    file.extension == 'pdf' ? Icons.picture_as_pdf : Icons.menu_book,
-                    size: 48,
-                    color: Colors.white,
-                  ),
-                ),
+                child: imageBytes == null
+                    ? Center(
+                        child: Icon(
+                          widget.file.extension == 'pdf' ? Icons.picture_as_pdf : Icons.menu_book,
+                          size: 48,
+                          color: Colors.white,
+                        ),
+                      )
+                    : null,
               ),
               const SizedBox(height: 8),
               // File name
               Text(
-                file.name,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
+                widget.file.name,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              const Spacer(),
+              // const Spacer(),
               // File info
               Text(
-                '${file.formattedSize} • ${file.formattedDate}',
+                '${widget.file.formattedSize} • ${widget.file.formattedDate}',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: Colors.grey.shade600,
                     ),

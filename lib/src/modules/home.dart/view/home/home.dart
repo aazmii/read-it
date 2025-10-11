@@ -56,7 +56,6 @@ class Home extends ConsumerWidget {
   }
 
   _onPickFile(BuildContext context, WidgetRef ref) async {
-    // if (!Platform.isAndroid) return;
     final pickedPlatformFile = await pickPDF();
     if (pickedPlatformFile == null) return;
     final pickedFile = File(pickedPlatformFile.path!);

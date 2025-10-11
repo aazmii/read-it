@@ -23,7 +23,7 @@ class _RecentFileTileState extends State<RecentFileTile> {
   }
 
   _loadImage() async {
-    imageBytes = await getPdfPageImageBytes(pdfFilePath: widget.file.path!, pageNumber: 1, scale: 2.0);
+    imageBytes = await getPdfPageImageBytes(pdfFilePath: widget.file.path!);
     if (mounted) setState(() {});
   }
 

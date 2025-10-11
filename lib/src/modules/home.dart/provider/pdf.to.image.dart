@@ -4,8 +4,8 @@ import 'package:pdfx/pdfx.dart';
 
 Future<Uint8List?> getPdfPageImageBytes({
   required String pdfFilePath,
-  required int pageNumber,
-  double scale = 3.0,
+  int? pageNumber = 1,
+  double scale = 2.0,
 }) async {
   try {
     final pdfDocument = await PdfDocument.openFile(pdfFilePath);
@@ -14,7 +14,7 @@ Future<Uint8List?> getPdfPageImageBytes({
     //   throw Exception('Invalid page number');
     // }
 
-    final page = await pdfDocument.getPage(pageNumber);
+    final page = await pdfDocument.getPage(pageNumber!);
     final pageImage = await page.render(
       width: page.width * scale.toInt(),
       height: page.height * scale.toInt(),

@@ -1,5 +1,6 @@
 // lib/src/services/file_scanner.dart
 import 'dart:io';
+import 'package:flutter/material.dart' show debugPrint;
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 
@@ -10,14 +11,14 @@ class FileScanner {
     try {
       // Get app-specific directories (no permission needed)
       List<Directory> directories = await _getAccessibleDirectories();
-      print('Scanning directories: ${directories.map((d) => d.path).join(', ')}');
+      debugPrint('Scanning directories: ${directories.map((d) => d.path).join(', ')}');
 
       for (var dir in directories) {
         if (await dir.exists()) {
-          print('Scanning directory: ${dir.path}');
+          debugPrint('Scanning directory: ${dir.path}');
           await _scanDirectory(dir, foundFiles);
         } else {
-          print('Directory does not exist: ${dir.path}');
+          debugPrint('Directory does not exist: ${dir.path}');
         }
       }
 
@@ -32,9 +33,9 @@ class FileScanner {
         }
       });
 
-      print('Total PDF/EPUB files found: ${foundFiles.length}');
+      debugPrint('Total PDF/EPUB files found: ${foundFiles.length}');
     } catch (e) {
-      print('Error scanning files: $e');
+      debugPrint('Error scanning files: $e');
     }
 
     return foundFiles;
@@ -66,16 +67,16 @@ class FileScanner {
         try {
           final dir = Directory(path);
           if (await dir.exists()) {
-            print('Found Download directory: $path');
+            debugPrint('Found Download directory: $path');
             directories.add(dir);
             break; // Use the first one that exists
           }
         } catch (e) {
-          print('Cannot access Download directory $path: $e');
+          debugPrint('Cannot access Download directory $path: $e');
         }
       }
     } catch (e) {
-      print('Error getting directories: $e');
+      debugPrint('Error getting directories: $e');
     }
 
     return directories;
@@ -91,7 +92,7 @@ class FileScanner {
           // Only add PDF and EPUB files
           if (extension == '.pdf' || extension == '.epub') {
             foundFiles.add(entity);
-            print('✅ Found readable file: ${entity.path}');
+            debugPrint('✅ Found readable file: ${entity.path}');
           }
         } else if (entity is Directory) {
           // Skip system directories to avoid permission issues
@@ -103,37 +104,13 @@ class FileScanner {
             try {
               await _scanDirectory(entity, foundFiles);
             } catch (e) {
-              print('Cannot scan subdirectory ${entity.path}: $e');
+              debugPrint('Cannot scan subdirectory ${entity.path}: $e');
             }
           }
         }
       }
     } catch (e) {
-      print('❌ Error scanning directory ${dir.path}: $e');
-    }
-  }
-
-  // Method to manually check Download directory
-  static Future<void> debugDownloadDirectory() async {
-    try {
-      final downloadDir = Directory('/storage/emulated/0/Download');
-      if (await downloadDir.exists()) {
-        print('📁 Download directory exists: ${downloadDir.path}');
-
-        final files = await downloadDir.list().toList();
-        print('📄 Total files in Download: ${files.length}');
-
-        for (var file in files) {
-          if (file is File) {
-            String extension = p.extension(file.path).toLowerCase();
-            print('${extension == '.pdf' || extension == '.epub' ? '✅' : '❌'} ${file.path}');
-          }
-        }
-      } else {
-        print('❌ Download directory does not exist');
-      }
-    } catch (e) {
-      print('❌ Cannot access Download directory: $e');
+      debugPrint('❌ Error scanning directory ${dir.path}: $e');
     }
   }
 }
