@@ -34,6 +34,7 @@ class _RecentFileTileState extends State<RecentFileTile> {
     return InkWell(
       onTap: widget.onPressed,
       child: Container(
+        margin: const EdgeInsets.only(right: 8),
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: context.theme.secondaryHeaderColor,
@@ -44,19 +45,27 @@ class _RecentFileTileState extends State<RecentFileTile> {
         child: IntrinsicHeight(
           child: Row(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: imageBytes != null
-                    ? Image.memory(imageBytes!, fit: BoxFit.cover)
-                    : Container(
-                        color: Colors.grey.shade300,
-                        child: Center(
-                          child: Icon(Icons.image, color: context.theme.primaryColor),
+              Expanded(
+                // width: 100,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: imageBytes != null
+                      ? Image.memory(imageBytes!, fit: BoxFit.cover)
+                      : Container(
+                          color: Colors.grey.shade300,
+                          child: Center(
+                            child: Icon(
+                              Icons.image,
+                              color: context.theme.primaryColor,
+                              size: 48,
+                            ),
+                          ),
                         ),
-                      ),
+                ),
               ),
               const SizedBox(width: 10),
               Expanded(
+                flex: 2,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,

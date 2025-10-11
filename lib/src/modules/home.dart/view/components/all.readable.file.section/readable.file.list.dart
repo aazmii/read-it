@@ -1,10 +1,13 @@
+import 'dart:io';
 import 'dart:typed_data' show Uint8List;
 
 import 'package:flutter/material.dart';
+import 'package:read_it/src/extensions/extensions.dart';
 import 'package:read_it/src/modules/home.dart/models/readable.file.dart';
 import 'package:read_it/src/modules/home.dart/provider/pdf.to.image.dart';
 import 'package:read_it/src/modules/home.dart/services/file.scanner.dart';
 import 'package:read_it/src/modules/home.dart/view/components/all.readable.file.section/error.placeholder.dart';
+import 'package:read_it/src/modules/pdf.viewer/view/pdf.viewer.dart';
 
 import 'empty.file.placeholder.dart' show EmptyFilePlaceholder;
 
@@ -54,22 +57,37 @@ class _ReadableFilesGridListState extends State<StorageFilesGridList> {
     if (_errorMessage.isNotEmpty) return ErrorPlacehoder(onRetry: _loadFilesFromStorage, msg: _errorMessage);
     if (_files.isEmpty) return EmptyFilePlaceholder(onRetry: _loadFilesFromStorage);
 
-    return GridView.builder(
-      padding: const EdgeInsets.all(16),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 16,
-        childAspectRatio: 0.7,
-      ),
-      itemCount: _files.length,
-      itemBuilder: (context, index) {
-        return _FileGridItem(
-          file: _files[index],
-          // onTap: () => _onFileTap(_files[index]),
-          onTap: () {},
-        );
-      },
+    return Column(
+      children: [
+        Row(
+          children: [
+            Text('All Files', style: context.text.titleMedium),
+            const Spacer(),
+            const Icon(Icons.filter_list),
+          ],
+        ),
+        Expanded(
+          child: GridView.builder(
+            padding: const EdgeInsets.all(16),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16,
+              childAspectRatio: 0.7,
+            ),
+            itemCount: _files.length,
+            itemBuilder: (context, index) {
+              return _FileGridItem(
+                file: _files[index],
+                // onTap: () => _onFileTap(_files[index]),
+                onTap: () {
+                  context.push(ScyncfuncitonPdfDetail(file: File(_files[index].path)));
+                },
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
@@ -145,7 +163,7 @@ class _FileGridItemState extends State<_FileGridItem> {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              // const Spacer(),
+              const Spacer(),
               // File info
               Text(
                 '${widget.file.formattedSize} • ${widget.file.formattedDate}',

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:read_it/src/extensions/extensions.dart';
 import 'package:read_it/src/modules/home.dart/models/opened.file.detail.dart';
-import 'package:read_it/src/modules/pdf.viewer/provider/detail.provider.dart';
 import 'package:read_it/src/modules/pdf.viewer/view/pdf.viewer.dart';
 
 import '../../../provider/home.provider.dart';
@@ -40,8 +39,8 @@ class RecentFileList extends ConsumerWidget {
                         return RecentFileTile(
                           file: recentFile,
                           onPressed: () async {
-                            ref.read(selectedPDFProvider.notifier).update = File(recentFile.path!);
-                            context.push(const ScyncfuncitonPdfDetail());
+                            // ref.read(selectedPDFProvider.notifier).update = File(recentFile.path!);
+                            context.push(ScyncfuncitonPdfDetail(file: File(recentFile.path!)));
                           },
                         );
                       },

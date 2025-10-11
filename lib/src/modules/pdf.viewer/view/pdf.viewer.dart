@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:read_it/src/modules/dictionary/api/dictionary.api.dart';
+import 'package:read_it/src/modules/home.dart/provider/home.provider.dart';
 import 'package:read_it/src/modules/pdf.viewer/provider/detail.provider.dart';
 import 'package:read_it/src/modules/pdf.viewer/provider/meaning.provider.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart' as viewer;
@@ -11,20 +12,22 @@ import '../components/word.bottom.sheet/word.meaning.bottomsheet.dart';
 
 //DEEPSEEK
 class ScyncfuncitonPdfDetail extends ConsumerStatefulWidget {
-  const ScyncfuncitonPdfDetail({super.key});
-
+  const ScyncfuncitonPdfDetail({super.key, required this.file});
+  final File file;
   @override
   PdfWordExtractorState createState() => PdfWordExtractorState();
 }
 
 class PdfWordExtractorState extends ConsumerState<ScyncfuncitonPdfDetail> {
   final viewer.PdfViewerController _pdfViewerController = viewer.PdfViewerController();
-  late File file;
+
   @override
   void initState() {
     super.initState();
-    final selectedFile = ref.read(selectedPDFProvider);
-    if (selectedFile != null) file = selectedFile;
+    Future.microtask(() {
+      ref.read(selectedPDFProvider.notifier).update = widget.file;
+      updateDB(widget.file);
+    });
   }
 
   String? _selectedText = '';
@@ -67,7 +70,7 @@ class PdfWordExtractorState extends ConsumerState<ScyncfuncitonPdfDetail> {
         ],
       ),
       body: viewer.SfPdfViewer.file(
-        file,
+        widget.file,
         canShowTextSelectionMenu: false,
         pageLayoutMode: viewer.PdfPageLayoutMode.continuous,
         controller: _pdfViewerController,

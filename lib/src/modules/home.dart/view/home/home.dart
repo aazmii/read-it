@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:read_it/src/extensions/extensions.dart';
 import 'package:read_it/src/modules/home.dart/view/components/all.readable.file.section/readable.file.list.dart';
 import 'package:read_it/src/modules/home.dart/view/components/recent.files.section/recent.files.list.dart';
-import 'package:read_it/src/modules/pdf.viewer/provider/detail.provider.dart';
 import 'package:read_it/src/modules/pdf.viewer/view/pdf.viewer.dart';
 
 import '../../../drawer/app.drawer.dart';
@@ -39,12 +38,14 @@ class Home extends ConsumerWidget {
       drawer: const AppDrawer(),
       appBar: AppBar(),
       body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8.0),
+        padding: EdgeInsets.symmetric(horizontal: 12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             RecentFileList(),
-            Expanded(child: StorageFilesGridList()),
+            Expanded(
+              child: StorageFilesGridList(),
+            ),
           ],
         ),
       ),
@@ -59,14 +60,12 @@ class Home extends ConsumerWidget {
     final pickedPlatformFile = await pickPDF();
     if (pickedPlatformFile == null) return;
     final pickedFile = File(pickedPlatformFile.path!);
-    await updateDB(pickedFile);
 
-    ref.read(selectedPDFProvider.notifier).update = pickedFile;
-
+    // ref.read(selectedPDFProvider.notifier).update = pickedFile;
     if (!context.mounted) return;
     // context.push(const SyncfunctinoWordBox());
     // context.push(const PdfWordExtractor());
-    context.push(const ScyncfuncitonPdfDetail());
+    context.push(ScyncfuncitonPdfDetail(file: pickedFile));
     // context.push(const PdfDetail());
     if (!context.mounted) return;
   }
