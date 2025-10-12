@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart' show kReleaseMode;
 
 import 'package:isar/isar.dart' show Isar;
 
-import '../modules/home.dart/models/opened.file.detail.dart';
-import '../modules/setting/model/setting.model.dart' show AppSettingSchema;
+import '../features/pdf.reader/data/models/opened.file.detail.dart';
+import '../features/setting/model/setting.model.dart' show AppSettingSchema;
 import '../core/utils/file/paths.dart' show AppDir, appDir, initDir;
 
 const _schema = [AppSettingSchema, RecentFileSchema];
