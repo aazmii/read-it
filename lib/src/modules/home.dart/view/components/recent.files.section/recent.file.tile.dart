@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:read_it/src/extensions/extensions.dart';
+import 'package:read_it/src/core/extensions/extensions.dart';
 import 'package:read_it/src/modules/home.dart/models/opened.file.detail.dart';
 import 'package:read_it/src/modules/home.dart/provider/pdf.to.image.dart';
 

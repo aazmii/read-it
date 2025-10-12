@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart' show BuildContext, MaterialApp, MediaQuery, TextScaler, Widget;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget, WidgetRef;
-import 'package:read_it/src/localization/app_localizations.dart';
+import 'package:read_it/src/presentation/localization/app_localizations.dart';
 
-import 'constants/constants.dart' show appName;
-import 'extensions/extensions.dart' show BuildContextExtension;
-import 'localization/loalization.dart' show localizationsDelegates, onGenerateTitle, supportedLocales, t;
-import 'modules/router/view/router.dart' show AppRouter;
-import 'theme/model/theme.model.dart' show ThemeProfileExtension;
-import 'theme/provider/theme.provider.dart' show themeProvider;
+import 'core/constants/constants.dart' show appName;
+import 'core/extensions/extensions.dart' show BuildContextExtension;
+import 'presentation/localization/loalization.dart' show localizationsDelegates, onGenerateTitle, supportedLocales, t;
+import 'presentation/router/view/router.dart' show AppRouter;
+import 'presentation/theme/model/theme.model.dart' show ThemeProfileExtension;
+import 'presentation/theme/provider/theme.provider.dart' show themeProvider;
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});

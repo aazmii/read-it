@@ -4,7 +4,7 @@ import 'package:isar/isar.dart' show Isar;
 
 import '../modules/home.dart/models/opened.file.detail.dart';
 import '../modules/setting/model/setting.model.dart' show AppSettingSchema;
-import 'paths.dart' show AppDir, appDir, initDir;
+import '../core/utils/file/paths.dart' show AppDir, appDir, initDir;
 
 const _schema = [AppSettingSchema, RecentFileSchema];
 late final Isar db;

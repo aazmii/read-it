@@ -5,7 +5,7 @@ import 'package:isar/isar.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:read_it/src/db/isar.dart';
-import 'package:read_it/src/extensions/extensions.dart';
+import 'package:read_it/src/core/extensions/extensions.dart';
 import 'package:read_it/src/modules/home.dart/models/opened.file.detail.dart';
 
 final recentFilesProvider = StreamProvider<List<RecentFile>>((ref) {

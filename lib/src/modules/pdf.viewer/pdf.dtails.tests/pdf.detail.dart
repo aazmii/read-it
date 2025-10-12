@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:read_it/src/extensions/extensions.dart';
+import 'package:read_it/src/core/extensions/extensions.dart';
 import 'package:read_it/src/modules/pdf.viewer/provider/detail.provider.dart';
 
 class PdfDetail extends ConsumerWidget {

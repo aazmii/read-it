@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:read_it/src/extensions/extensions.dart';
+import 'package:read_it/src/core/extensions/extensions.dart';
 import 'package:read_it/src/modules/home.dart/view/components/all.readable.file.section/readable.file.list.dart';
 import 'package:read_it/src/modules/home.dart/view/components/recent.files.section/recent.files.list.dart';
 import 'package:read_it/src/modules/pdf.viewer/view/pdf.viewer.dart';
 
-import '../../../drawer/app.drawer.dart';
+import '../../../setting/view/drawer/app.drawer.dart';
 import '../../provider/home.provider.dart';
 
 class Home extends ConsumerWidget {

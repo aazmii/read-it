@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:typed_data' show Uint8List;
 
 import 'package:flutter/material.dart';
-import 'package:read_it/src/extensions/extensions.dart';
+import 'package:read_it/src/core/extensions/extensions.dart';
 import 'package:read_it/src/modules/home.dart/models/readable.file.dart';
 import 'package:read_it/src/modules/home.dart/provider/pdf.to.image.dart';
 import 'package:read_it/src/modules/home.dart/services/file.scanner.dart';

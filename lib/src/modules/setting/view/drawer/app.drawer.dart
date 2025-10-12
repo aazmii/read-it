@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:read_it/src/modules/router/provider/route.provider.dart';
+import 'package:read_it/src/presentation/router/provider/route.provider.dart';
 import 'package:read_it/src/modules/setting/view/setting.view.dart';
 
 class AppDrawer extends StatelessWidget {
