@@ -9,72 +9,50 @@ part of 'opened.file.detail.dart';
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
 
-extension GetRecentFileCollection on Isar {
-  IsarCollection<RecentFile> get recentFiles => this.collection();
+extension GetReadableFileIsarCollection on Isar {
+  IsarCollection<ReadableFileIsar> get readableFileIsars => this.collection();
 }
 
-const RecentFileSchema = CollectionSchema(
-  name: r'RecentFile',
-  id: 428040767606462206,
+const ReadableFileIsarSchema = CollectionSchema(
+  name: r'ReadableFileIsar',
+  id: -135622754576858179,
   properties: {
-    r'converPath': PropertySchema(
+    r'fileSize': PropertySchema(
       id: 0,
-      name: r'converPath',
-      type: IsarType.string,
+      name: r'fileSize',
+      type: IsarType.long,
     ),
-    r'fileData': PropertySchema(
+    r'lastOpened': PropertySchema(
       id: 1,
-      name: r'fileData',
-      type: IsarType.byteList,
-    ),
-    r'isLastOpened': PropertySchema(
-      id: 2,
-      name: r'isLastOpened',
-      type: IsarType.bool,
-    ),
-    r'lastOpen': PropertySchema(
-      id: 3,
-      name: r'lastOpen',
+      name: r'lastOpened',
       type: IsarType.dateTime,
     ),
     r'path': PropertySchema(
-      id: 4,
+      id: 2,
       name: r'path',
       type: IsarType.string,
     )
   },
-  estimateSize: _recentFileEstimateSize,
-  serialize: _recentFileSerialize,
-  deserialize: _recentFileDeserialize,
-  deserializeProp: _recentFileDeserializeProp,
+  estimateSize: _readableFileIsarEstimateSize,
+  serialize: _readableFileIsarSerialize,
+  deserialize: _readableFileIsarDeserialize,
+  deserializeProp: _readableFileIsarDeserializeProp,
   idName: r'id',
   indexes: {},
   links: {},
   embeddedSchemas: {},
-  getId: _recentFileGetId,
-  getLinks: _recentFileGetLinks,
-  attach: _recentFileAttach,
+  getId: _readableFileIsarGetId,
+  getLinks: _readableFileIsarGetLinks,
+  attach: _readableFileIsarAttach,
   version: '3.1.0+1',
 );
 
-int _recentFileEstimateSize(
-  RecentFile object,
+int _readableFileIsarEstimateSize(
+  ReadableFileIsar object,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  {
-    final value = object.converPath;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.fileData;
-    if (value != null) {
-      bytesCount += 3 + value.length;
-    }
-  }
   {
     final value = object.path;
     if (value != null) {
@@ -84,37 +62,33 @@ int _recentFileEstimateSize(
   return bytesCount;
 }
 
-void _recentFileSerialize(
-  RecentFile object,
+void _readableFileIsarSerialize(
+  ReadableFileIsar object,
   IsarWriter writer,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.converPath);
-  writer.writeByteList(offsets[1], object.fileData);
-  writer.writeBool(offsets[2], object.isLastOpened);
-  writer.writeDateTime(offsets[3], object.lastOpen);
-  writer.writeString(offsets[4], object.path);
+  writer.writeLong(offsets[0], object.fileSize);
+  writer.writeDateTime(offsets[1], object.lastOpened);
+  writer.writeString(offsets[2], object.path);
 }
 
-RecentFile _recentFileDeserialize(
+ReadableFileIsar _readableFileIsarDeserialize(
   Id id,
   IsarReader reader,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = RecentFile(
-    fileData: reader.readByteList(offsets[1]),
-    isLastOpened: reader.readBoolOrNull(offsets[2]),
-    lastOpen: reader.readDateTimeOrNull(offsets[3]),
-    path: reader.readStringOrNull(offsets[4]),
+  final object = ReadableFileIsar(
+    fileSize: reader.readLongOrNull(offsets[0]),
+    lastOpened: reader.readDateTimeOrNull(offsets[1]),
+    path: reader.readStringOrNull(offsets[2]),
   );
-  object.converPath = reader.readStringOrNull(offsets[0]);
   object.id = id;
   return object;
 }
 
-P _recentFileDeserializeProp<P>(
+P _readableFileIsarDeserializeProp<P>(
   IsarReader reader,
   int propertyId,
   int offset,
@@ -122,44 +96,42 @@ P _recentFileDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 1:
-      return (reader.readByteList(offset)) as P;
-    case 2:
-      return (reader.readBoolOrNull(offset)) as P;
-    case 3:
       return (reader.readDateTimeOrNull(offset)) as P;
-    case 4:
+    case 2:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
 
-Id _recentFileGetId(RecentFile object) {
+Id _readableFileIsarGetId(ReadableFileIsar object) {
   return object.id;
 }
 
-List<IsarLinkBase<dynamic>> _recentFileGetLinks(RecentFile object) {
+List<IsarLinkBase<dynamic>> _readableFileIsarGetLinks(ReadableFileIsar object) {
   return [];
 }
 
-void _recentFileAttach(IsarCollection<dynamic> col, Id id, RecentFile object) {
+void _readableFileIsarAttach(
+    IsarCollection<dynamic> col, Id id, ReadableFileIsar object) {
   object.id = id;
 }
 
-extension RecentFileQueryWhereSort
-    on QueryBuilder<RecentFile, RecentFile, QWhere> {
-  QueryBuilder<RecentFile, RecentFile, QAfterWhere> anyId() {
+extension ReadableFileIsarQueryWhereSort
+    on QueryBuilder<ReadableFileIsar, ReadableFileIsar, QWhere> {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterWhere> anyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
     });
   }
 }
 
-extension RecentFileQueryWhere
-    on QueryBuilder<RecentFile, RecentFile, QWhereClause> {
-  QueryBuilder<RecentFile, RecentFile, QAfterWhereClause> idEqualTo(Id id) {
+extension ReadableFileIsarQueryWhere
+    on QueryBuilder<ReadableFileIsar, ReadableFileIsar, QWhereClause> {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterWhereClause> idEqualTo(
+      Id id) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
         lower: id,
@@ -168,7 +140,8 @@ extension RecentFileQueryWhere
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterWhereClause> idNotEqualTo(Id id) {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterWhereClause>
+      idNotEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -190,8 +163,8 @@ extension RecentFileQueryWhere
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterWhereClause> idGreaterThan(Id id,
-      {bool include = false}) {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterWhereClause>
+      idGreaterThan(Id id, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.greaterThan(lower: id, includeLower: include),
@@ -199,8 +172,8 @@ extension RecentFileQueryWhere
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterWhereClause> idLessThan(Id id,
-      {bool include = false}) {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterWhereClause>
+      idLessThan(Id id, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.lessThan(upper: id, includeUpper: include),
@@ -208,7 +181,7 @@ extension RecentFileQueryWhere
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterWhereClause> idBetween(
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterWhereClause> idBetween(
     Id lowerId,
     Id upperId, {
     bool includeLower = true,
@@ -225,226 +198,74 @@ extension RecentFileQueryWhere
   }
 }
 
-extension RecentFileQueryFilter
-    on QueryBuilder<RecentFile, RecentFile, QFilterCondition> {
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      converPathIsNull() {
+extension ReadableFileIsarQueryFilter
+    on QueryBuilder<ReadableFileIsar, ReadableFileIsar, QFilterCondition> {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      fileSizeIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'converPath',
+        property: r'fileSize',
       ));
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      converPathIsNotNull() {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      fileSizeIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'converPath',
+        property: r'fileSize',
       ));
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> converPathEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      fileSizeEqualTo(int? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'converPath',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      converPathGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'converPath',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      converPathLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'converPath',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> converPathBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'converPath',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      converPathStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'converPath',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      converPathEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'converPath',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      converPathContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'converPath',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> converPathMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'converPath',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      converPathIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'converPath',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      converPathIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'converPath',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> fileDataIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'fileData',
-      ));
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      fileDataIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'fileData',
-      ));
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      fileDataElementEqualTo(int value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'fileData',
+        property: r'fileSize',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      fileDataElementGreaterThan(
-    int value, {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      fileSizeGreaterThan(
+    int? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'fileData',
+        property: r'fileSize',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      fileDataElementLessThan(
-    int value, {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      fileSizeLessThan(
+    int? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'fileData',
+        property: r'fileSize',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      fileDataElementBetween(
-    int lower,
-    int upper, {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      fileSizeBetween(
+    int? lower,
+    int? upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'fileData',
+        property: r'fileSize',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -453,97 +274,8 @@ extension RecentFileQueryFilter
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      fileDataLengthEqualTo(int length) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'fileData',
-        length,
-        true,
-        length,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      fileDataIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'fileData',
-        0,
-        true,
-        0,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      fileDataIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'fileData',
-        0,
-        false,
-        999999,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      fileDataLengthLessThan(
-    int length, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'fileData',
-        0,
-        true,
-        length,
-        include,
-      );
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      fileDataLengthGreaterThan(
-    int length, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'fileData',
-        length,
-        include,
-        999999,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      fileDataLengthBetween(
-    int lower,
-    int upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'fileData',
-        lower,
-        includeLower,
-        upper,
-        includeUpper,
-      );
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> idEqualTo(
-      Id value) {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      idEqualTo(Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -552,7 +284,8 @@ extension RecentFileQueryFilter
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> idGreaterThan(
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      idGreaterThan(
     Id value, {
     bool include = false,
   }) {
@@ -565,7 +298,8 @@ extension RecentFileQueryFilter
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> idLessThan(
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      idLessThan(
     Id value, {
     bool include = false,
   }) {
@@ -578,7 +312,8 @@ extension RecentFileQueryFilter
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> idBetween(
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      idBetween(
     Id lower,
     Id upper, {
     bool includeLower = true,
@@ -595,89 +330,64 @@ extension RecentFileQueryFilter
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      isLastOpenedIsNull() {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      lastOpenedIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'isLastOpened',
+        property: r'lastOpened',
       ));
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      isLastOpenedIsNotNull() {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      lastOpenedIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'isLastOpened',
+        property: r'lastOpened',
       ));
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      isLastOpenedEqualTo(bool? value) {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      lastOpenedEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'isLastOpened',
+        property: r'lastOpened',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> lastOpenIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'lastOpen',
-      ));
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      lastOpenIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'lastOpen',
-      ));
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> lastOpenEqualTo(
-      DateTime? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'lastOpen',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition>
-      lastOpenGreaterThan(
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      lastOpenedGreaterThan(
     DateTime? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'lastOpen',
+        property: r'lastOpened',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> lastOpenLessThan(
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      lastOpenedLessThan(
     DateTime? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'lastOpen',
+        property: r'lastOpened',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> lastOpenBetween(
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      lastOpenedBetween(
     DateTime? lower,
     DateTime? upper, {
     bool includeLower = true,
@@ -685,7 +395,7 @@ extension RecentFileQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'lastOpen',
+        property: r'lastOpened',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -694,7 +404,8 @@ extension RecentFileQueryFilter
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> pathIsNull() {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      pathIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'path',
@@ -702,7 +413,8 @@ extension RecentFileQueryFilter
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> pathIsNotNull() {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      pathIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'path',
@@ -710,7 +422,8 @@ extension RecentFileQueryFilter
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> pathEqualTo(
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      pathEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -723,7 +436,8 @@ extension RecentFileQueryFilter
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> pathGreaterThan(
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      pathGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -738,7 +452,8 @@ extension RecentFileQueryFilter
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> pathLessThan(
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      pathLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -753,7 +468,8 @@ extension RecentFileQueryFilter
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> pathBetween(
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      pathBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -772,7 +488,8 @@ extension RecentFileQueryFilter
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> pathStartsWith(
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      pathStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -785,7 +502,8 @@ extension RecentFileQueryFilter
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> pathEndsWith(
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      pathEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -798,9 +516,8 @@ extension RecentFileQueryFilter
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> pathContains(
-      String value,
-      {bool caseSensitive = true}) {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      pathContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
         property: r'path',
@@ -810,9 +527,8 @@ extension RecentFileQueryFilter
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> pathMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      pathMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
         property: r'path',
@@ -822,7 +538,8 @@ extension RecentFileQueryFilter
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> pathIsEmpty() {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      pathIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'path',
@@ -831,7 +548,8 @@ extension RecentFileQueryFilter
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterFilterCondition> pathIsNotEmpty() {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterFilterCondition>
+      pathIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'path',
@@ -841,154 +559,130 @@ extension RecentFileQueryFilter
   }
 }
 
-extension RecentFileQueryObject
-    on QueryBuilder<RecentFile, RecentFile, QFilterCondition> {}
+extension ReadableFileIsarQueryObject
+    on QueryBuilder<ReadableFileIsar, ReadableFileIsar, QFilterCondition> {}
 
-extension RecentFileQueryLinks
-    on QueryBuilder<RecentFile, RecentFile, QFilterCondition> {}
+extension ReadableFileIsarQueryLinks
+    on QueryBuilder<ReadableFileIsar, ReadableFileIsar, QFilterCondition> {}
 
-extension RecentFileQuerySortBy
-    on QueryBuilder<RecentFile, RecentFile, QSortBy> {
-  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> sortByConverPath() {
+extension ReadableFileIsarQuerySortBy
+    on QueryBuilder<ReadableFileIsar, ReadableFileIsar, QSortBy> {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterSortBy>
+      sortByFileSize() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'converPath', Sort.asc);
+      return query.addSortBy(r'fileSize', Sort.asc);
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> sortByConverPathDesc() {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterSortBy>
+      sortByFileSizeDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'converPath', Sort.desc);
+      return query.addSortBy(r'fileSize', Sort.desc);
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> sortByIsLastOpened() {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterSortBy>
+      sortByLastOpened() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isLastOpened', Sort.asc);
+      return query.addSortBy(r'lastOpened', Sort.asc);
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> sortByIsLastOpenedDesc() {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterSortBy>
+      sortByLastOpenedDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isLastOpened', Sort.desc);
+      return query.addSortBy(r'lastOpened', Sort.desc);
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> sortByLastOpen() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lastOpen', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> sortByLastOpenDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lastOpen', Sort.desc);
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> sortByPath() {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterSortBy> sortByPath() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'path', Sort.asc);
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> sortByPathDesc() {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterSortBy>
+      sortByPathDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'path', Sort.desc);
     });
   }
 }
 
-extension RecentFileQuerySortThenBy
-    on QueryBuilder<RecentFile, RecentFile, QSortThenBy> {
-  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> thenByConverPath() {
+extension ReadableFileIsarQuerySortThenBy
+    on QueryBuilder<ReadableFileIsar, ReadableFileIsar, QSortThenBy> {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterSortBy>
+      thenByFileSize() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'converPath', Sort.asc);
+      return query.addSortBy(r'fileSize', Sort.asc);
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> thenByConverPathDesc() {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterSortBy>
+      thenByFileSizeDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'converPath', Sort.desc);
+      return query.addSortBy(r'fileSize', Sort.desc);
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> thenById() {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> thenByIdDesc() {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterSortBy>
+      thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> thenByIsLastOpened() {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterSortBy>
+      thenByLastOpened() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isLastOpened', Sort.asc);
+      return query.addSortBy(r'lastOpened', Sort.asc);
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> thenByIsLastOpenedDesc() {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterSortBy>
+      thenByLastOpenedDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isLastOpened', Sort.desc);
+      return query.addSortBy(r'lastOpened', Sort.desc);
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> thenByLastOpen() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lastOpen', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> thenByLastOpenDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lastOpen', Sort.desc);
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> thenByPath() {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterSortBy> thenByPath() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'path', Sort.asc);
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QAfterSortBy> thenByPathDesc() {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QAfterSortBy>
+      thenByPathDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'path', Sort.desc);
     });
   }
 }
 
-extension RecentFileQueryWhereDistinct
-    on QueryBuilder<RecentFile, RecentFile, QDistinct> {
-  QueryBuilder<RecentFile, RecentFile, QDistinct> distinctByConverPath(
-      {bool caseSensitive = true}) {
+extension ReadableFileIsarQueryWhereDistinct
+    on QueryBuilder<ReadableFileIsar, ReadableFileIsar, QDistinct> {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QDistinct>
+      distinctByFileSize() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'converPath', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'fileSize');
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QDistinct> distinctByFileData() {
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QDistinct>
+      distinctByLastOpened() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'fileData');
+      return query.addDistinctBy(r'lastOpened');
     });
   }
 
-  QueryBuilder<RecentFile, RecentFile, QDistinct> distinctByIsLastOpened() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'isLastOpened');
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QDistinct> distinctByLastOpen() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'lastOpen');
-    });
-  }
-
-  QueryBuilder<RecentFile, RecentFile, QDistinct> distinctByPath(
+  QueryBuilder<ReadableFileIsar, ReadableFileIsar, QDistinct> distinctByPath(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'path', caseSensitive: caseSensitive);
@@ -996,39 +690,28 @@ extension RecentFileQueryWhereDistinct
   }
 }
 
-extension RecentFileQueryProperty
-    on QueryBuilder<RecentFile, RecentFile, QQueryProperty> {
-  QueryBuilder<RecentFile, int, QQueryOperations> idProperty() {
+extension ReadableFileIsarQueryProperty
+    on QueryBuilder<ReadableFileIsar, ReadableFileIsar, QQueryProperty> {
+  QueryBuilder<ReadableFileIsar, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
     });
   }
 
-  QueryBuilder<RecentFile, String?, QQueryOperations> converPathProperty() {
+  QueryBuilder<ReadableFileIsar, int?, QQueryOperations> fileSizeProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'converPath');
+      return query.addPropertyName(r'fileSize');
     });
   }
 
-  QueryBuilder<RecentFile, List<int>?, QQueryOperations> fileDataProperty() {
+  QueryBuilder<ReadableFileIsar, DateTime?, QQueryOperations>
+      lastOpenedProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'fileData');
+      return query.addPropertyName(r'lastOpened');
     });
   }
 
-  QueryBuilder<RecentFile, bool?, QQueryOperations> isLastOpenedProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'isLastOpened');
-    });
-  }
-
-  QueryBuilder<RecentFile, DateTime?, QQueryOperations> lastOpenProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'lastOpen');
-    });
-  }
-
-  QueryBuilder<RecentFile, String?, QQueryOperations> pathProperty() {
+  QueryBuilder<ReadableFileIsar, String?, QQueryOperations> pathProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'path');
     });

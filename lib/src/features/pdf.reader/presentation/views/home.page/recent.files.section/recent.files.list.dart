@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:read_it/src/core/extensions/extensions.dart';
+import 'package:read_it/src/features/pdf.reader/domain/entities/readable.file.dart';
 import 'package:read_it/src/features/pdf.reader/presentation/views/home.page/recent.files.section/recent.file.tile.dart';
-import 'package:read_it/src/features/pdf.reader/data/models/opened.file.detail.dart';
 import 'package:read_it/src/features/pdf.viewer/view/pdf.viewer.dart';
 
 import '../../../provider/home.provider.dart';
@@ -12,7 +12,7 @@ import '../../../provider/home.provider.dart';
 /// Only appears when there are recent files
 class RecentFileList extends ConsumerWidget {
   const RecentFileList({super.key, this.recentFiles});
-  final List<RecentFile>? recentFiles;
+  final List<ReadableFile>? recentFiles;
   @override
   Widget build(BuildContext context, ref) {
     return ref.watch(recentFilesProvider).when(
@@ -40,7 +40,7 @@ class RecentFileList extends ConsumerWidget {
                           file: recentFile,
                           onPressed: () async {
                             // ref.read(selectedPDFProvider.notifier).update = File(recentFile.path!);
-                            context.push(ScyncfuncitonPdfDetail(file: File(recentFile.path!)));
+                            context.push(ScyncfuncitonPdfDetail(file: File(recentFile.path)));
                           },
                         );
                       },

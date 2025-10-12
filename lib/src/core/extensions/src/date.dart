@@ -30,16 +30,12 @@ extension DateUtils on DateTime {
 
   bool get isYesterday {
     final nowDate = DateTime.now();
-    return year == nowDate.year &&
-        month == nowDate.month &&
-        day == nowDate.day - 1;
+    return year == nowDate.year && month == nowDate.month && day == nowDate.day - 1;
   }
 
   bool get isTomorrow {
     final nowDate = DateTime.now();
-    return year == nowDate.year &&
-        month == nowDate.month &&
-        day == nowDate.day + 1;
+    return year == nowDate.year && month == nowDate.month && day == nowDate.day + 1;
   }
 
   DateTime addDays(int amount) => DateTime(
@@ -68,8 +64,7 @@ extension DateUtils on DateTime {
 
   DateTime get previousDay => addDays(-1);
 
-  bool isSameDay(DateTime b) =>
-      year == b.year && month == b.month && day == b.day;
+  bool isSameDay(DateTime b) => year == b.year && month == b.month && day == b.day;
 
   List<DateTime> get daysInMonth {
     var first = firstDayOfMonth;
@@ -106,8 +101,7 @@ extension DateUtils on DateTime {
   }
 
   DateTime get lastDayOfMonth {
-    var beginningNextMonth =
-        (month < 12) ? DateTime(year, month + 1, 1) : DateTime(year + 1, 1, 1);
+    var beginningNextMonth = (month < 12) ? DateTime(year, month + 1, 1) : DateTime(year + 1, 1, 1);
     return beginningNextMonth.subtract(const Duration(days: 1));
   }
 
@@ -174,6 +168,7 @@ extension DateUtils on DateTime {
     return woy;
   }
 
-  bool isBetween(DateTime start, DateTime end) =>
-      isAfter(start) && isBefore(end);
+  bool isBetween(DateTime start, DateTime end) => isAfter(start) && isBefore(end);
+
+  String get formattedDate => '$day/$month/$year';
 }

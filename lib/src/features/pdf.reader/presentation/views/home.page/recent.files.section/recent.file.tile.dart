@@ -2,13 +2,12 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:read_it/src/core/extensions/extensions.dart';
-
-import 'package:read_it/src/features/pdf.reader/data/models/opened.file.detail.dart';
+import 'package:read_it/src/features/pdf.reader/domain/entities/readable.file.dart';
 import 'package:read_it/src/features/pdf.reader/presentation/provider/pdf.to.image.dart';
 
 class RecentFileTile extends StatefulWidget {
   const RecentFileTile({super.key, required this.file, this.onPressed});
-  final RecentFile file;
+  final ReadableFile file;
   final VoidCallback? onPressed;
 
   @override
@@ -24,11 +23,11 @@ class _RecentFileTileState extends State<RecentFileTile> {
   }
 
   _loadImage() async {
-    imageBytes = await getPdfPageImageBytes(pdfFilePath: widget.file.path!);
+    imageBytes = await getPdfPageImageBytes(pdfFilePath: widget.file.path);
     if (mounted) setState(() {});
   }
 
-  String get fileExtension => widget.file.path!.split('.').last;
+  String get fileExtension => widget.file.path.split('.').last;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +71,7 @@ class _RecentFileTileState extends State<RecentFileTile> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.file.path!.getLast('/'),
+                      widget.file.path.getLast('/'),
                       style: context.text.titleMedium,
                     ),
                     Row(

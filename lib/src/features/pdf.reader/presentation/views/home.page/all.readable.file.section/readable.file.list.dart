@@ -3,7 +3,7 @@ import 'dart:typed_data' show Uint8List;
 
 import 'package:flutter/material.dart';
 import 'package:read_it/src/core/extensions/extensions.dart';
-import 'package:read_it/src/features/pdf.reader/data/models/readable.file.dart';
+import 'package:read_it/src/features/pdf.reader/domain/entities/readable.file.dart';
 import 'package:read_it/src/features/pdf.reader/presentation/provider/pdf.to.image.dart';
 import 'package:read_it/src/features/pdf.reader/data/datasources/file.scanner.dart';
 import 'package:read_it/src/features/pdf.reader/presentation/views/home.page/all.readable.file.section/error.placeholder.dart';
@@ -136,7 +136,7 @@ class _FileGridItemState extends State<_FileGridItem> {
                 height: 120,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: imageBytes == null ? _getFileColor(widget.file.extension) : null,
+                  color: imageBytes == null ? _getFileColor(widget.file.fileExt) : null,
                   borderRadius: BorderRadius.circular(8),
                   image: imageBytes != null
                       ? DecorationImage(
@@ -148,7 +148,7 @@ class _FileGridItemState extends State<_FileGridItem> {
                 child: imageBytes == null
                     ? Center(
                         child: Icon(
-                          widget.file.extension == 'pdf' ? Icons.picture_as_pdf : Icons.menu_book,
+                          widget.file.fileExt == 'pdf' ? Icons.picture_as_pdf : Icons.menu_book,
                           size: 48,
                           color: Colors.white,
                         ),
@@ -166,7 +166,7 @@ class _FileGridItemState extends State<_FileGridItem> {
               const Spacer(),
               // File info
               Text(
-                '${widget.file.formattedSize} • ${widget.file.formattedDate}',
+                '${widget.file.fileSize.toReadableFileSize} • ${widget.file.lastOpend?.formattedDate}',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: Colors.grey.shade600,
                     ),
