@@ -8,7 +8,7 @@ class TransparentLoading {
       Navigator.of(context, rootNavigator: true).push(
         PageRouteBuilder(
           pageBuilder: (_, __, ___) => PopScope(
-            onPopInvoked: (v) => false,
+            onPopInvokedWithResult: (v, t) => false,
             child: const Scaffold(
               backgroundColor: Colors.transparent,
               body: Center(
