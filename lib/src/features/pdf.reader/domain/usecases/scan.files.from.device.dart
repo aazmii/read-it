@@ -2,13 +2,13 @@ import 'package:read_it/src/core/usecase/usecase.dart';
 import 'package:read_it/src/features/pdf.reader/domain/entities/readable.file.dart';
 import 'package:read_it/src/features/pdf.reader/domain/repositories/pdf.reader.repo.dart';
 
-class UpdateRecentFile implements UseCase<void, ReadableFileEntity> {
+class GetAllArticlesUseCase implements UseCase<List<ReadableFileEntity>, void> {
   final PDFReaderRepository _isarReadableFileRepo;
 
-  UpdateRecentFile(this._isarReadableFileRepo);
+  GetAllArticlesUseCase(this._isarReadableFileRepo);
 
   @override
-  Future<void> call({ReadableFileEntity? p}) {
-    return _isarReadableFileRepo.markFileAsLastOpened(p!);
+  Future<List<ReadableFileEntity>> call({void p}) {
+    return _isarReadableFileRepo.scanFilesFromDevice();
   }
 }
