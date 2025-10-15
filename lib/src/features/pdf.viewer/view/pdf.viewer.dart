@@ -26,7 +26,8 @@ class PdfWordExtractorState extends ConsumerState<ScyncfuncitonPdfDetail> {
     super.initState();
     Future.microtask(() {
       ref.read(selectedPDFProvider.notifier).update = widget.file;
-      updateDB(widget.file);
+      ref.read(recentFilesProvider.notifier).saveFile(widget.file);
+      // updateDB(widget.file);
     });
   }
 

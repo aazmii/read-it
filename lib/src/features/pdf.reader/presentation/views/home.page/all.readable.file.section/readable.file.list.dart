@@ -2,60 +2,28 @@ import 'dart:io';
 import 'dart:typed_data' show Uint8List;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:read_it/src/core/extensions/extensions.dart';
 import 'package:read_it/src/features/pdf.reader/domain/entities/readable.file.dart';
+import 'package:read_it/src/features/pdf.reader/presentation/provider/home.provider.dart';
 import 'package:read_it/src/features/pdf.reader/presentation/provider/pdf.to.image.dart';
-import 'package:read_it/src/features/pdf.reader/data/datasources/file.scanner.dart';
-import 'package:read_it/src/features/pdf.reader/presentation/views/home.page/all.readable.file.section/error.placeholder.dart';
+import 'package:read_it/src/features/pdf.viewer/provider/detail.provider.dart';
 import 'package:read_it/src/features/pdf.viewer/view/pdf.viewer.dart';
 
 import 'empty.file.placeholder.dart' show EmptyFilePlaceholder;
 
-class StorageFilesGridList extends StatefulWidget {
+class StorageFilesGridList extends ConsumerWidget {
   const StorageFilesGridList({super.key});
 
-  @override
-  State<StorageFilesGridList> createState() => _ReadableFilesGridListState();
-}
-
-class _ReadableFilesGridListState extends State<StorageFilesGridList> {
-  List<ReadableFile> _files = [];
-  bool _isLoading = true;
-  String _errorMessage = '';
+  Future<void> _loadFilesFromStorage(WidgetRef ref) async => ref.invalidate(storageFilesProvider);
 
   @override
-  void initState() {
-    super.initState();
-    _loadFilesFromStorage();
-  }
+  Widget build(BuildContext context, ref) {
+    final files = ref.watch(storageFilesProvider).valueOrNull;
 
-  Future<void> _loadFilesFromStorage() async {
-    setState(() {
-      _isLoading = true;
-      _errorMessage = '';
-    });
-
-    try {
-      final fileEntities = await FileScanner.getReadableFiles();
-      final files = fileEntities.map((e) => ReadableFile.fromFile(e)).toList();
-
-      setState(() {
-        _files = files;
-        _isLoading = false;
-      });
-    } catch (e) {
-      setState(() {
-        _errorMessage = 'Could not access storage. Use "Add Files" button.';
-        _isLoading = false;
-      });
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (_isLoading) const Center(child: CircularProgressIndicator());
-    if (_errorMessage.isNotEmpty) return ErrorPlacehoder(onRetry: _loadFilesFromStorage, msg: _errorMessage);
-    if (_files.isEmpty) return EmptyFilePlaceholder(onRetry: _loadFilesFromStorage);
+    // if (_isLoading) const Center(child: CircularProgressIndicator());
+    // if (_errorMessage.isNotEmpty) return ErrorPlacehoder(onRetry: _loadFilesFromStorage, msg: _errorMessage);
+    if (files == null || files.isEmpty) return EmptyFilePlaceholder(onRetry: () => _loadFilesFromStorage(ref));
 
     return Column(
       children: [
@@ -75,13 +43,14 @@ class _ReadableFilesGridListState extends State<StorageFilesGridList> {
               mainAxisSpacing: 16,
               childAspectRatio: 0.7,
             ),
-            itemCount: _files.length,
+            itemCount: files.length,
             itemBuilder: (context, index) {
               return _FileGridItem(
-                file: _files[index],
+                file: files[index],
                 // onTap: () => _onFileTap(_files[index]),
                 onTap: () {
-                  context.push(ScyncfuncitonPdfDetail(file: File(_files[index].path)));
+                  ref.read(selectedPDFProvider.notifier).update = File(files[index].path);
+                  context.push(ScyncfuncitonPdfDetail(file: File(files[index].path)));
                 },
               );
             },

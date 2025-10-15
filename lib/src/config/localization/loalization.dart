@@ -2,7 +2,7 @@ import 'package:flutter/material.dart' show BuildContext, Locale;
 
 import 'package:flutter_localizations/flutter_localizations.dart'
     show GlobalCupertinoLocalizations, GlobalMaterialLocalizations, GlobalWidgetsLocalizations;
-import 'package:read_it/src/presentation/localization/app_localizations.dart';
+import 'package:read_it/src/config/localization/app_localizations.dart';
 
 AppLocalizations? t;
 

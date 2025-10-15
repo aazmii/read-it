@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../presentation/theme/model/theme.model.dart';
-import '../../../presentation/theme/provider/theme.provider.dart';
+import '../../../config/theme/model/theme.model.dart';
+import '../../../config/theme/provider/theme.provider.dart';
 
 class SettingView extends StatelessWidget {
   const SettingView({super.key});
