@@ -62,7 +62,7 @@ class StorageFilesGridList extends ConsumerWidget {
 }
 
 class _FileGridItem extends StatefulWidget {
-  final ReadableFile file;
+  final ReadableFileEntity file;
   final VoidCallback onTap;
 
   const _FileGridItem({

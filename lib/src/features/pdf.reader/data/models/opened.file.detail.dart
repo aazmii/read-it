@@ -16,11 +16,11 @@ class ReadableFileIsar {
     this.lastOpened,
     this.fileSize,
   });
-  ReadableFile fromDomain() {
-    return ReadableFile(path: path!, lastOpend: lastOpened!, fileSize: fileSize ?? 0);
+  ReadableFileEntity fromDomain() {
+    return ReadableFileEntity(path: path!, lastOpend: lastOpened!, fileSize: fileSize ?? 0);
   }
 
-  static ReadableFileIsar toDomain(ReadableFile file) {
+  static ReadableFileIsar toDomain(ReadableFileEntity file) {
     return ReadableFileIsar()
       ..path = file.path
       ..lastOpened = file.lastOpend

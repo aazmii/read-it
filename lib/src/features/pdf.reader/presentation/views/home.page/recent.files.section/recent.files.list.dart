@@ -12,7 +12,7 @@ import '../../../provider/home.provider.dart';
 /// Only appears when there are recent files
 class RecentFileList extends ConsumerWidget {
   const RecentFileList({super.key, this.recentFiles});
-  final List<ReadableFile>? recentFiles;
+  final List<ReadableFileEntity>? recentFiles;
   @override
   Widget build(BuildContext context, ref) {
     return ref.watch(recentFilesProvider).when(

@@ -7,7 +7,7 @@ import 'package:read_it/src/features/pdf.reader/presentation/provider/pdf.to.ima
 
 class RecentFileTile extends StatefulWidget {
   const RecentFileTile({super.key, required this.file, this.onPressed});
-  final ReadableFile file;
+  final ReadableFileEntity file;
   final VoidCallback? onPressed;
 
   @override

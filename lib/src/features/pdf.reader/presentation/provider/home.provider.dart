@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:read_it/src/core/providers/isar.provider.dart';
-import 'package:read_it/src/features/pdf.reader/data/datasources/file.scanner.dart';
+import 'package:read_it/src/features/pdf.reader/data/datasources/local/file.scanner.service.dart';
 import 'package:read_it/src/features/pdf.reader/data/repositories/pdf.repository.impl.dart';
 import 'package:read_it/src/features/pdf.reader/domain/entities/readable.file.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -11,17 +11,17 @@ part 'home.provider.g.dart';
 
 @riverpod
 class StorageFiles extends _$StorageFiles {
-  late final IsarReadableFileRepoImpl readableFileRepo;
+  late final PDFReaderRepositoryImpl readableFileRepo;
   @override
-  Future<List<ReadableFile>> build() async {
+  Future<List<ReadableFileEntity>> build() async {
     final db = ref.watch(isarDbProvider);
-    readableFileRepo = IsarReadableFileRepoImpl(db);
+    readableFileRepo = PDFReaderRepositoryImpl(db);
     final fileEntities = await FileScanner.getReadableFiles();
-    return fileEntities.map((e) => ReadableFile.fromFile(e)).toList();
+    return fileEntities.map((e) => ReadableFileEntity.fromFile(e)).toList();
   }
 
   Future saveFile(File file) async {
-    final readableFile = ReadableFile(
+    final readableFile = ReadableFileEntity(
       path: file.path.trim(),
       lastOpend: DateTime.now(),
       fileSize: await file.length(),
@@ -32,16 +32,16 @@ class StorageFiles extends _$StorageFiles {
 
 @riverpod
 class RecentFiles extends _$RecentFiles {
-  late final IsarReadableFileRepoImpl readableFileRepo;
+  late final PDFReaderRepositoryImpl readableFileRepo;
   @override
-  Future<List<ReadableFile>> build() async {
+  Future<List<ReadableFileEntity>> build() async {
     final db = ref.watch(isarDbProvider);
-    readableFileRepo = IsarReadableFileRepoImpl(db);
+    readableFileRepo = PDFReaderRepositoryImpl(db);
     return await readableFileRepo.getRecentFiles();
   }
 
   Future saveFile(File file) async {
-    final readableFile = ReadableFile(
+    final readableFile = ReadableFileEntity(
       path: file.path.trim(),
       lastOpend: DateTime.now(),
       fileSize: await file.length(),
@@ -51,12 +51,12 @@ class RecentFiles extends _$RecentFiles {
   }
 }
 
-// final recentFilesProvider = StreamProvider<List<ReadableFile>>((ref) {
+// final recentFilesProvider = StreamProvider<List<ReadableFileEntity>>((ref) {
 //   final repo = ref.watch(pdfRepositoryProvider); // Your repo provider
 //   return repo.watchRecentFiles();
 // });
 
-// final recentFilesProvider = StreamProvider<List<ReadableFile>>((ref) {
+// final recentFilesProvider = StreamProvider<List<ReadableFileEntity>>((ref) {
 //   final db = ref.read(isarServiceProvider).db;
 //   db.readableFileIsars;
 //   return db.readableFileIsars.watchLazy(fireImmediately: true).asyncMap((_) async {

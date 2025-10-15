@@ -1,12 +1,12 @@
 import '../entities/readable.file.dart';
 
-abstract class IsarReadableFileRepo {
-  Stream<List<ReadableFile>> watchRecentFiles();
-  Future<List<ReadableFile>> scanForReadableFiles();
-  Future<List<ReadableFile>> getRecentFiles();
-  Future<void> saveRecentFile(ReadableFile file);
-  Future<void> markFileAsLastOpened(ReadableFile file);
+abstract class PDFReaderRepository {
+  Stream<List<ReadableFileEntity>> watchRecentFiles();
+  Future<List<ReadableFileEntity>> scanForReadableFiles();
+  Future<List<ReadableFileEntity>> getRecentFiles();
+  Future<void> saveRecentFile(ReadableFileEntity file);
+  Future<void> markFileAsLastOpened(ReadableFileEntity file);
   // Future<void> clearRecentFiles();
-  // Future<ReadableFile?> getLastOpenedFile();
-  // Future<void> deleteRecentFile(ReadableFile file);
+  // Future<ReadableFileEntity?> getLastOpenedFile();
+  // Future<void> deleteRecentFile(ReadableFileEntity file);
 }
