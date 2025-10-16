@@ -2,22 +2,35 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:read_it/src/core/providers/isar.provider.dart';
-import 'package:read_it/src/features/pdf.reader/data/datasources/local/file.scanner.service.dart';
 import 'package:read_it/src/features/pdf.reader/data/repositories/pdf.repository.impl.dart';
 import 'package:read_it/src/features/pdf.reader/domain/entities/readable.file.dart';
+import 'package:read_it/src/features/pdf.reader/domain/repositories/pdf.reader.repo.dart';
+import 'package:read_it/src/features/pdf.reader/domain/usecases/get.recent.files.dart' show GetRecentReadableFiles;
+import 'package:read_it/src/features/pdf.reader/domain/usecases/save.file.dart' show UpdateRecentFile;
+import 'package:read_it/src/features/pdf.reader/domain/usecases/scan.files.from.device.dart' show GetAllFileUseCase;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'home.provider.g.dart';
 
 @riverpod
 class StorageFiles extends _$StorageFiles {
-  late final PDFReaderRepositoryImpl readableFileRepo;
+  // REPOSITORY
+  late final PDFReaderRepository _repo;
+
+  // USE CASES
+  late final UpdateRecentFile _updateRecentFile;
+  late final GetAllFileUseCase _getAllFiles;
+
   @override
   Future<List<ReadableFileEntity>> build() async {
     final db = ref.watch(isarDbProvider);
-    readableFileRepo = PDFReaderRepositoryImpl(db);
-    final fileEntities = await FileScanner.getReadableFiles();
-    return fileEntities.map((e) => ReadableFileEntity.fromFile(e)).toList();
+    _repo = PDFReaderRepositoryImpl(db);
+
+    _updateRecentFile = UpdateRecentFile(_repo);
+    _getAllFiles = GetAllFileUseCase(_repo);
+
+    final files = await _getAllFiles.call();
+    return files;
   }
 
   Future saveFile(File file) async {
@@ -26,18 +39,27 @@ class StorageFiles extends _$StorageFiles {
       lastOpend: DateTime.now(),
       fileSize: await file.length(),
     );
-    await readableFileRepo.saveRecentFile(readableFile);
+    await _updateRecentFile.call(p: readableFile);
   }
 }
 
 @riverpod
 class RecentFiles extends _$RecentFiles {
-  late final PDFReaderRepositoryImpl readableFileRepo;
+  // REPOSITORY
+  late final PDFReaderRepository _repo;
+
+  // USE-CASES
+  late final UpdateRecentFile _updateRecentFileUseCase;
+  late final GetRecentReadableFiles _getRecentFiles;
+
+  // late final PDFReaderRepositoryImpl readableFileRepo;
   @override
   Future<List<ReadableFileEntity>> build() async {
     final db = ref.watch(isarDbProvider);
-    readableFileRepo = PDFReaderRepositoryImpl(db);
-    return await readableFileRepo.getRecentFiles();
+    _repo = PDFReaderRepositoryImpl(db);
+    _updateRecentFileUseCase = UpdateRecentFile(_repo);
+    _getRecentFiles = GetRecentReadableFiles(_repo);
+    return _getRecentFiles.call();
   }
 
   Future saveFile(File file) async {
@@ -46,8 +68,8 @@ class RecentFiles extends _$RecentFiles {
       lastOpend: DateTime.now(),
       fileSize: await file.length(),
     );
-    await readableFileRepo.saveRecentFile(readableFile);
-    ref.invalidateSelf();
+    await _updateRecentFileUseCase.call(p: readableFile);
+    state = AsyncData(await _getRecentFiles.call());
   }
 }
 

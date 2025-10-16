@@ -15,44 +15,36 @@ class RecentFileList extends ConsumerWidget {
   final List<ReadableFileEntity>? recentFiles;
   @override
   Widget build(BuildContext context, ref) {
-    return ref.watch(recentFilesProvider).when(
-          data: (recentFiles) {
-            if (recentFiles.isEmpty) return const SizedBox.shrink();
-            return Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Recently Opened', style: context.text.titleMedium),
-                    const Icon(Icons.arrow_forward_ios)
-                  ],
-                ),
-                const SizedBox(height: 10),
-                SizedBox(
-                  height: 180,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: List.generate(
-                      recentFiles.length,
-                      (index) {
-                        final recentFile = recentFiles[index];
-                        return RecentFileTile(
-                          file: recentFile,
-                          onPressed: () async {
-                            // ref.read(selectedPDFProvider.notifier).update = File(recentFile.path!);
-                            context.push(ScyncfuncitonPdfDetail(file: File(recentFile.path)));
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-              ],
-            );
-          },
-          error: (e, s) => const Text('err'),
-          loading: () => const Text('Loading'),
-        );
+    final recentFiles = ref.watch(recentFilesProvider).valueOrNull;
+    if (recentFiles == null || recentFiles.isEmpty) return const SizedBox.shrink();
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [Text('Recently Opened', style: context.text.titleMedium), const Icon(Icons.arrow_forward_ios)],
+        ),
+        const SizedBox(height: 10),
+        SizedBox(
+          height: 180,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: List.generate(
+              recentFiles.length,
+              (index) {
+                final recentFile = recentFiles[index];
+                return RecentFileTile(
+                  file: recentFile,
+                  onPressed: () async {
+                    // ref.read(selectedPDFProvider.notifier).update = File(recentFile.path!);
+                    context.push(ScyncfuncitonPdfDetail(file: File(recentFile.path)));
+                  },
+                );
+              },
+            ),
+          ),
+        ),
+        const SizedBox(height: 10),
+      ],
+    );
   }
 }

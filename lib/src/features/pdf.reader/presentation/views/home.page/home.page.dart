@@ -38,10 +38,11 @@ class Home extends ConsumerWidget {
       drawer: const AppDrawer(),
       appBar: AppBar(),
       body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12.0),
+        padding: EdgeInsets.symmetric(horizontal: 12.0,vertical: 12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // SizedBox(height: 10),
             RecentFileList(),
             Expanded(
               child: StorageFilesGridList(),
@@ -57,6 +58,13 @@ class Home extends ConsumerWidget {
   }
 
   _onPickFile(BuildContext context, WidgetRef ref) async {
+    // final db = ref.read(isarDbProvider);
+    // final repo = PDFReaderRepositoryImpl(db);
+    // final useCase = GetAllFileUseCase(repo);
+
+    // final files = await useCase.call();
+    // print(files.length);
+    // return;
     final pickedPlatformFile = await pickPDF();
     if (pickedPlatformFile == null) return;
     final pickedFile = File(pickedPlatformFile.path!);

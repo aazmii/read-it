@@ -6,12 +6,12 @@ part of 'home.provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$storageFilesHash() => r'c268d76bb7308ac48df5dfe6df2ec8b8d815220d';
+String _$storageFilesHash() => r'66bfe4b37ccbc17d6cc573fdb687cdae22cf03ca';
 
 /// See also [StorageFiles].
 @ProviderFor(StorageFiles)
-final storageFilesProvider =
-    AutoDisposeAsyncNotifierProvider<StorageFiles, List<ReadableFile>>.internal(
+final storageFilesProvider = AutoDisposeAsyncNotifierProvider<StorageFiles,
+    List<ReadableFileEntity>>.internal(
   StorageFiles.new,
   name: r'storageFilesProvider',
   debugGetCreateSourceHash:
@@ -20,13 +20,13 @@ final storageFilesProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$StorageFiles = AutoDisposeAsyncNotifier<List<ReadableFile>>;
-String _$recentFilesHash() => r'4b53bfe2c4f5e2dfef91f97f7552d8463b4a4b8f';
+typedef _$StorageFiles = AutoDisposeAsyncNotifier<List<ReadableFileEntity>>;
+String _$recentFilesHash() => r'760428c9b3cd5dd49a8905f0fc28c2ad63a89886';
 
 /// See also [RecentFiles].
 @ProviderFor(RecentFiles)
-final recentFilesProvider =
-    AutoDisposeAsyncNotifierProvider<RecentFiles, List<ReadableFile>>.internal(
+final recentFilesProvider = AutoDisposeAsyncNotifierProvider<RecentFiles,
+    List<ReadableFileEntity>>.internal(
   RecentFiles.new,
   name: r'recentFilesProvider',
   debugGetCreateSourceHash:
@@ -35,6 +35,6 @@ final recentFilesProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$RecentFiles = AutoDisposeAsyncNotifier<List<ReadableFile>>;
+typedef _$RecentFiles = AutoDisposeAsyncNotifier<List<ReadableFileEntity>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

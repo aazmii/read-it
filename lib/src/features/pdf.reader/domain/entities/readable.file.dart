@@ -15,7 +15,7 @@ class ReadableFileEntity {
   })  : name = path.split('/').last,
         fileExt = path.split('.').last.toLowerCase();
 
-  factory ReadableFileEntity.fromFile(FileSystemEntity file) {
+  factory ReadableFileEntity.fromFileSystemEntity(FileSystemEntity file) {
     final stat = file.statSync();
     return ReadableFileEntity(path: file.path, fileSize: stat.size);
   }
