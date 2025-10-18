@@ -15,6 +15,13 @@ extension StringUtils on String {
   String get capitalize => '${this[0].toUpperCase()}${substring(1)}';
 
   bool hasMatch(String v) => toLowerCase().contains(v.toLowerCase());
+
+  String capitalizeFirstLetter() {
+    if (isEmpty) {
+      return this; // Return empty string as is
+    }
+    return '${this[0].toUpperCase()}${substring(1)}';
+  }
 }
 
 String pluralize(

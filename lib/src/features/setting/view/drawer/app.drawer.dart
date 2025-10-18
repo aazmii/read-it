@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:read_it/src/config/router/provider/route.provider.dart';
 import 'package:read_it/src/features/setting/view/setting.view.dart';
+import 'package:read_it/src/features/translation/presentaion/views/available.language.view.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -18,6 +19,11 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Settings'),
             leading: const Icon(Icons.settings),
             onTap: () async => await fadePush(context, const SettingView()),
+          ),
+          ListTile(
+            title: const Text('Languages'),
+            leading: const Icon(Icons.language),
+            onTap: () async => await fadePush(context, const AvailableLanguagesView()),
           ),
         ],
       ),
