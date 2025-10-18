@@ -6,7 +6,7 @@ part of 'home.provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$storageFilesHash() => r'66bfe4b37ccbc17d6cc573fdb687cdae22cf03ca';
+String _$storageFilesHash() => r'350c94070cd6672a6856dbe01ef2387f251485db';
 
 /// See also [StorageFiles].
 @ProviderFor(StorageFiles)
@@ -21,7 +21,7 @@ final storageFilesProvider = AutoDisposeAsyncNotifierProvider<StorageFiles,
 );
 
 typedef _$StorageFiles = AutoDisposeAsyncNotifier<List<ReadableFileEntity>>;
-String _$recentFilesHash() => r'760428c9b3cd5dd49a8905f0fc28c2ad63a89886';
+String _$recentFilesHash() => r'ffcb76a0c15acf5401147e6e6283e6332dee75ac';
 
 /// See also [RecentFiles].
 @ProviderFor(RecentFiles)

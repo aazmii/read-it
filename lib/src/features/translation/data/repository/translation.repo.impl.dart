@@ -15,4 +15,19 @@ class TranslationRepositoryImpl implements TranslationRepository {
     );
     return languages;
   }
+
+  @override
+  Future<bool> downloadLanguage(String code) async {
+    return await _modelManager.downloadModel(code);
+  }
+
+  @override
+  Future<bool> deleteLanguage(String code) async {
+    return await _modelManager.deleteModel(code);
+  }
+
+  @override
+  Future<String?> translateText(OnDeviceTranslator translator, String text) {
+    return translator.translateText(text);
+  }
 }

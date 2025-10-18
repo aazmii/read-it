@@ -38,7 +38,7 @@ class Home extends ConsumerWidget {
       drawer: const AppDrawer(),
       appBar: AppBar(),
       body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12.0,vertical: 12),
+        padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

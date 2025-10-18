@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:read_it/src/features/translation/presentaion/providers/get.lang.provider.dart';
+import 'package:read_it/src/features/translation/presentaion/providers/languages.provider.dart';
 
 import 'language.tile.dart';
 
@@ -18,7 +18,7 @@ class _AvailableLanguagesViewState extends State<AvailableLanguagesView> {
       appBar: AppBar(title: const Text('Languages')),
       body: Consumer(
         builder: (context, ref, child) {
-          final availablLangs = ref.watch(availableLanguagesProvider);
+          final availablLangs = ref.watch(languagesProvider);
           return availablLangs.when(
             data: (langs) {
               return ListView.builder(
@@ -28,7 +28,7 @@ class _AvailableLanguagesViewState extends State<AvailableLanguagesView> {
                   return LanguageTile(
                     title: lang.name,
                     t: () {
-                      lang.isDownloaded ? _deleteModel(lang.code) : _downloadModel(lang.code);
+                      lang.isDownloaded ? _deleteModel(ref, lang.code) : _downloadModel(ref, lang.code);
                     },
                     isDownloaded: lang.isDownloaded,
                     isBusy: false,
@@ -46,26 +46,11 @@ class _AvailableLanguagesViewState extends State<AvailableLanguagesView> {
     );
   }
 
-  Future<String> _downloadModel(String code) async {
-    await Future.delayed(Durations.extralong4);
-    ScaffoldMessenger.of(context).showMaterialBanner(MaterialBanner(
-      content: Text('Downloading $code'),
-      actions: [
-        TextButton(
-          child: const Text('Cancel'),
-          onPressed: () => ScaffoldMessenger.of(context).hideCurrentMaterialBanner(),
-        )
-      ],
-    ));
-    return getSuccess(code);
+  Future _downloadModel(WidgetRef ref, String code) async {
+    await ref.read(languagesProvider.notifier).downloadLanguage(code);
   }
 
-  Future<String> _deleteModel(String code) async {
-    return '';
-  }
-
-  Future<String> getSuccess(String t) async {
-    await Future.delayed(Durations.extralong4);
-    return 'yo';
+  Future _deleteModel(WidgetRef ref, String code) async {
+    return await ref.read(languagesProvider.notifier).downloadLanguage(code);
   }
 }
