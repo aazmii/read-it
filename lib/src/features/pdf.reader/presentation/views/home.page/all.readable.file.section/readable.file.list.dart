@@ -7,9 +7,8 @@ import 'package:read_it/src/core/extensions/extensions.dart';
 import 'package:read_it/src/features/pdf.reader/domain/entities/readable.file.dart';
 import 'package:read_it/src/features/pdf.reader/presentation/provider/home.provider.dart';
 import 'package:read_it/src/features/pdf.reader/presentation/provider/pdf.to.image.dart';
-import 'package:read_it/src/features/pdf.viewer/provider/detail.provider.dart';
-import 'package:read_it/src/features/pdf.viewer/view/pdf.viewer.dart';
 
+import '../../pdf.view.page/pdf.view.page.dart';
 import 'empty.file.placeholder.dart' show EmptyFilePlaceholder;
 
 class StorageFilesGridList extends ConsumerWidget {

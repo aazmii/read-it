@@ -10,17 +10,21 @@ class Translator extends _$Translator {
   late final TranslationRepository repo;
   @override
   OnDeviceTranslator build() {
+    final link = ref.keepAlive(); // KEEPS ALIVE THE TRANSLATOR
     repo = TranslationRepositoryImpl();
-
-    /// TODO: take from settings
-    return OnDeviceTranslator(
+    final translator = OnDeviceTranslator(
       sourceLanguage: TranslateLanguage.english,
       targetLanguage: TranslateLanguage.french,
     );
+    ref.onDispose(() {
+      translator.close();
+      link.close();
+    });
+    return translator;
   }
 
-  Future<String?> translateText(String text) async {
-    return repo.translateText(state, text);
+  Future<String?> translate(String text) async {
+    return await repo.translateText(state, text);
   }
 }
 

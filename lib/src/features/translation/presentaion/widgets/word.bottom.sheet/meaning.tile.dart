@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:read_it/src/core/extensions/extensions.dart';
-import 'package:read_it/src/features/dictionary/model/word.model/word.model.dart';
+import 'package:read_it/src/features/translation/data/models/word.model/word.model.dart';
 
 class MeaningTile extends StatelessWidget {
   const MeaningTile({super.key, required this.index, required this.meaning});

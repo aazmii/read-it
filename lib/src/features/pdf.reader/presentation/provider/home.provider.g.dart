@@ -21,6 +21,20 @@ final storageFilesProvider = AutoDisposeAsyncNotifierProvider<StorageFiles,
 );
 
 typedef _$StorageFiles = AutoDisposeAsyncNotifier<List<ReadableFileEntity>>;
+String _$selectedPDFHash() => r'a509c4ca566dc58cdbb02b5904f1ccb21dae12ff';
+
+/// See also [SelectedPDF].
+@ProviderFor(SelectedPDF)
+final selectedPDFProvider = NotifierProvider<SelectedPDF, File?>.internal(
+  SelectedPDF.new,
+  name: r'selectedPDFProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$selectedPDFHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$SelectedPDF = Notifier<File?>;
 String _$recentFilesHash() => r'ffcb76a0c15acf5401147e6e6283e6332dee75ac';
 
 /// See also [RecentFiles].

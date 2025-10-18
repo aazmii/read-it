@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:read_it/src/features/dictionary/model/word.meaning.dart';
-import 'package:read_it/src/features/dictionary/model/word.model/word.model.dart';
+import 'package:read_it/src/features/translation/data/models/word.meaning.dart';
+import 'package:read_it/src/features/translation/data/models/word.model/word.model.dart';
 
 import 'meaning.display.widget/meaning.display.widget.dart';
 

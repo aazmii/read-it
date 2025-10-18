@@ -6,4 +6,6 @@ abstract class TranslationRepository {
   Future<bool> downloadLanguage(String code);
   Future<bool> deleteLanguage(String code);
   Future<String?> translateText(OnDeviceTranslator translator, String text);
+  
+  
 }

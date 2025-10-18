@@ -5,10 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:read_it/src/core/extensions/extensions.dart';
 import 'package:read_it/src/features/pdf.reader/presentation/views/home.page/all.readable.file.section/readable.file.list.dart';
 import 'package:read_it/src/features/pdf.reader/presentation/views/home.page/recent.files.section/recent.files.list.dart';
-import 'package:read_it/src/features/pdf.viewer/view/pdf.viewer.dart';
 
 import '../../../../setting/view/drawer/app.drawer.dart';
 import '../../provider/home.provider.dart';
+import '../pdf.view.page/pdf.view.page.dart' show ScyncfuncitonPdfDetail;
 
 class Home extends ConsumerWidget {
   const Home({super.key});

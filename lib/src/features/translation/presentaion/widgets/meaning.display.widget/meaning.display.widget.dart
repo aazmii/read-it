@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:read_it/src/core/extensions/extensions.dart';
-import 'package:read_it/src/features/dictionary/model/word.model/word.model.dart';
+import 'package:read_it/src/features/translation/data/models/word.model/word.model.dart';
 
 import 'action.panel.dart';
 import 'custom.textfield.dart';
@@ -10,6 +10,7 @@ class MeaningDisplayWidget extends StatelessWidget {
   final WordModel word;
   @override
   Widget build(BuildContext context) {
+    final firstMeaning = word.meanings != null && word.meanings!.isNotEmpty ? word.meanings?.first : null;
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
       child: SizedBox(
@@ -33,7 +34,8 @@ class MeaningDisplayWidget extends StatelessWidget {
             const Divider(),
             Expanded(
               child: CustomTextField(
-                text: word.meanings?.first.definitions?.first.definition ?? '',
+                text: firstMeaning?.definitions?.first.definition ?? '',
+                // text:  word.meanings?.isNotEmpty? word.meanings?.first.definitions?.first.definition ?? '',
                 readOnly: true,
                 // showLoader: true,
               ),

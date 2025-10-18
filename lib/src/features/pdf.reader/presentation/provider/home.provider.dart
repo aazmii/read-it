@@ -43,6 +43,14 @@ class StorageFiles extends _$StorageFiles {
   }
 }
 
+@Riverpod(keepAlive: true)
+class SelectedPDF extends _$SelectedPDF {
+  @override
+  File? build() => null;
+
+  set update(File doc) => state = doc;
+}
+
 @riverpod
 class RecentFiles extends _$RecentFiles {
   // REPOSITORY

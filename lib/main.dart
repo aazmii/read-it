@@ -3,7 +3,7 @@ import 'package:flutter/services.dart' show DeviceOrientation, SystemChrome;
 import 'package:flutter_riverpod/flutter_riverpod.dart' show ProviderScope;
 import 'package:read_it/src/core/db/isar.service.dart';
 import 'package:read_it/src/core/providers/isar.provider.dart';
-import 'package:read_it/src/features/dictionary/api/e2b.dictionary.dart';
+import 'package:read_it/src/features/translation/data/datasource/local/e2b.dictionary.dart';
 
 import 'src/app.dart' show MyApp;
 

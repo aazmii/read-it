@@ -5,9 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:read_it/src/core/extensions/extensions.dart';
 import 'package:read_it/src/features/pdf.reader/domain/entities/readable.file.dart';
 import 'package:read_it/src/features/pdf.reader/presentation/views/home.page/recent.files.section/recent.file.tile.dart';
-import 'package:read_it/src/features/pdf.viewer/view/pdf.viewer.dart';
 
 import '../../../provider/home.provider.dart';
+import '../../pdf.view.page/pdf.view.page.dart';
 
 /// Only appears when there are recent files
 class RecentFileList extends ConsumerWidget {
